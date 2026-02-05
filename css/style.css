@@ -1,0 +1,270 @@
+/* Smartfy Main Styles */
+
+:root {
+    --color-navy: #0B1B3D;
+    --color-red: #E11D2E;
+    --color-white: #FFFFFF;
+}
+
+body {
+    background-color: var(--color-white);
+    color: var(--color-navy);
+    overflow-x: hidden;
+    cursor: default;
+    /* We will use a custom cursor follower in Canvas */
+}
+
+/* --- Typography --- */
+.font-display {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- Glassmorphism --- */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(11, 27, 61, 0.05);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(11, 27, 61, 0.05);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.glass-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 40px 0 rgba(11, 27, 61, 0.1);
+    border-color: rgba(225, 29, 46, 0.2);
+}
+
+/* --- Cinematic Intro --- */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-navy);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#intro-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Hero Section --- */
+.hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* --- Navigation Active Links --- */
+.nav-link.active {
+    color: var(--color-red);
+    font-weight: 600;
+}
+
+/* --- Mobile Menu --- */
+#mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+    background: rgba(11, 27, 61, 0.95);
+    backdrop-filter: blur(15px);
+}
+
+#mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* --- Lenis Smooth Scroll --- */
+html.lenis {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+/* --- Liquid Progress Bar --- */
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--color-red);
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+/* --- 3D Tilt Cards --- */
+.tilt-card {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.tilt-content {
+    transform: translateZ(20px);
+}
+
+/* --- Hero Red Pulse --- */
+.hero-pulse {
+    box-shadow: 0 0 0 0 rgba(225, 29, 46, 0.7);
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(225, 29, 46, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(225, 29, 46, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(225, 29, 46, 0);
+    }
+}
+
+/* --- Signature Footer --- */
+.signature-footer {
+    position: relative;
+    background-color: #F8FAFC;
+    overflow: hidden;
+    z-index: 10;
+    border-top: 1px solid rgba(11, 27, 61, 0.1);
+}
+
+.footer-watermark {
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 20vw;
+    color: var(--color-navy);
+    opacity: 0.05;
+    pointer-events: none;
+    line-height: 1;
+    z-index: 0;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.magnetic-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: color 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    color: var(--color-navy);
+}
+
+.magnetic-icon:hover {
+    color: white;
+    background-color: var(--color-red);
+}
+
+.newsletter-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(11, 27, 61, 0.2);
+    width: 100%;
+    padding: 10px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--color-navy);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-input:focus {
+    border-color: var(--color-red);
+}
+
+.newsletter-input::placeholder {
+    color: rgba(11, 27, 61, 0.4);
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50px;
+    padding: 12px 16px;
+    /* Initial round-ish */
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    z-index: 999;
+    /* Above intro overlay if needed, but usually below */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 50px;
+    height: 50px;
+    white-space: nowrap;
+}
+
+.whatsapp-float:hover {
+    width: 220px;
+    gap: 10px;
+    padding: 12px 20px;
+    justify-content: center;
+}
+
+.whatsapp-text {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.whatsapp-float:hover .whatsapp-text {
+    opacity: 1;
+    transition-delay: 0.1s;
+}

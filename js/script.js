@@ -272,34 +272,50 @@ function animateHero() {
 animateHero();
 
 
-// --- 3. NAVIGATION & MOBILE MENU ---
-const mobileBtn = document.getElementById('mobile-btn');
-const mobileMenu = document.getElementById('mobile-menu');
+// --- 3. NAVIGATION & MOBILE MENU (SimpleHeader Sheet) ---
+const menuToggle = document.getElementById('menu-toggle');
+const sheetDrawer = document.getElementById('sheet-drawer');
+const sheetOverlay = document.getElementById('sheet-overlay');
 const closeBtn = document.getElementById('close-btn');
+const sheetLinks = document.querySelectorAll('.sheet-link, .sheet-btn-primary');
 
-mobileBtn.addEventListener('click', () => {
-    mobileMenu.classList.add('active');
-});
+function openMenu() {
+    sheetDrawer.classList.remove('-translate-x-full');
+    sheetOverlay.classList.remove('opacity-0', 'pointer-events-none');
+}
 
-closeBtn.addEventListener('click', () => {
-    mobileMenu.classList.remove('active');
-});
+function closeMenu() {
+    sheetDrawer.classList.add('-translate-x-full');
+    sheetOverlay.classList.add('opacity-0', 'pointer-events-none');
+}
 
-document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
+if (menuToggle) menuToggle.addEventListener('click', openMenu);
+if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+if (sheetOverlay) sheetOverlay.addEventListener('click', closeMenu);
+
+sheetLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        closeMenu();
+        if (href && href !== '#') {
+            e.preventDefault();
+            setTimeout(() => {
+                const target = document.querySelector(href);
+                if (target) lenis.scrollTo(target, { offset: -80 });
+            }, 300);
+        }
     });
 });
 
-// Smooth Scroll to ID for Navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Desktop Links Smooth Scroll
+document.querySelectorAll('.nav-ghost-link, a[href^="#"].group').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
         const target = document.querySelector(targetId);
         if (target) {
-            lenis.scrollTo(target);
+            lenis.scrollTo(target, { offset: -80 });
         }
     });
 });
@@ -494,6 +510,56 @@ if (window.innerWidth > 768) {
         opacity: 0,
         duration: 1.5,
         ease: "expo.out",
+        clearProps: "all"
+    });
+
+    // --- Line-Mask Reveal Animation (Apple/Linear Style) ---
+    document.querySelectorAll('.reveal-mask').forEach((mask) => {
+        const lines = mask.querySelectorAll('.reveal-line');
+        if (lines.length === 0) {
+            const content = mask.innerHTML;
+            mask.innerHTML = `<span class="reveal-line">${content}</span>`;
+        }
+        gsap.from(mask.querySelectorAll('.reveal-line'), {
+            scrollTrigger: {
+                trigger: mask,
+                start: "top 85%",
+            },
+            y: 60,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 1.2,
+            ease: "power4.out",
+            clearProps: "all"
+        });
+    });
+
+    // --- Fade-Up Observer for Staggered Entrances ---
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.08}s`;
+        fadeObserver.observe(el);
+    });
+
+    // Solution Card Stagger Entrance
+    gsap.from(".sol-card", {
+        scrollTrigger: {
+            trigger: "#solutions",
+            start: "top 75%",
+        },
+        y: 30,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
         clearProps: "all"
     });
 }

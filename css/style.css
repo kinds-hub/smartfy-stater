@@ -90,55 +90,83 @@ body {
 /* --- Glassmorphism --- */
 /* .glass-nav styles moved to Tailwind utility classes in HTML for floating effect */
 
-/* Fixed Logo Visibility in Dark Mode */
-.nav-logo-img {
-    filter: brightness(0) invert(1);
+/* Professional Chromatic Backlight - Senior Developer Style */
+.logo-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
 }
 
-/* Nav Links - Glass Pill Style */
-.nav-link-glass {
-    padding: 0.5rem 0.8rem;
-    /* Compact for tablet/dense menu */
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 9999px;
+.logo-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    height: 140%;
+    /* Chromatic Bloom: Blue-tinted glow instead of harsh white */
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, transparent 70%);
+    filter: blur(20px);
+    z-index: -1;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.5;
+    /* Reduced from 0.8 for subtle integration */
+}
+
+.logo-wrapper:hover::before {
+    width: 160%;
+    height: 160%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+    opacity: 0.8;
+}
+
+.nav-logo-img {
+    position: relative;
+    z-index: 2;
+    /* Added contrast/saturation so logo colors pop naturally */
+    filter: contrast(1.1) saturate(1.1);
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    /* Compact text */
-    letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.8);
+}
+
+.logo-wrapper:hover .nav-logo-img {
+    transform: scale(1.02);
+    filter: contrast(1.15) saturate(1.15);
+}
+
+/* Ghost Variant Link (Restored) */
+.nav-ghost-link {
+    padding: 0.5rem 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    transition: all 0.2s ease;
+    text-decoration: none;
     white-space: nowrap;
 }
 
-@media (min-width: 1024px) {
-    .nav-link-glass {
-        padding: 0.6rem 1.4rem;
-        font-size: 0.85rem;
-    }
+.nav-ghost-link:hover {
+    color: #FFFFFF;
 }
 
-.nav-link-glass:hover {
-    background: var(--color-red);
-    border-color: var(--color-red);
-    color: white;
-    box-shadow: 0 0 15px rgba(225, 29, 46, 0.4);
+/* Sheet Drawer Styles */
+.sheet-link {
+    display: block;
+    padding: 0.75rem 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--color-red);
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--color-red);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+.sheet-link:hover {
+    color: #E11D2E;
 }
 
 /* --- Cinematic Intro --- */
@@ -411,7 +439,7 @@ html.lenis {
 
 /* --- Smartify Light Cards (High Contrast Standards) --- */
 .light-card {
-    background: #FFFFFF;
+    background: #F1F3F8;
     border: 1px solid rgba(11, 27, 61, 0.1);
     border-radius: 1.5rem;
     /* rounded-2xl */
@@ -879,11 +907,11 @@ h2,
 }
 
 .industry-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1rem;
     padding: 2rem;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     overflow: hidden;
 }
@@ -901,9 +929,9 @@ h2,
 }
 
 .industry-card:hover {
-    border-color: rgba(225, 29, 46, 0.3);
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(225, 29, 46, 0.2);
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .industry-card:hover::before {
@@ -980,6 +1008,406 @@ h2,
     font-weight: 600;
 }
 
+/* --- SOLUTION CARD VARIANTS (Ported from React CVA) --- */
+
+/* Base solution card */
+.sol-card {
+    position: relative;
+    width: 100%;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.sol-card-content {
+    padding: 1.5rem;
+}
+
+/* Variant: Gradient Lines */
+.sol-card--gradient {
+    position: relative;
+    padding: 0 1.5rem;
+}
+
+.sol-card--gradient .gradient-line-h {
+    position: absolute;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, transparent, rgba(225, 29, 46, 0.3), rgba(255, 255, 255, 0.15), transparent);
+}
+
+.sol-card--gradient .gradient-line-h.top {
+    top: 1rem;
+}
+
+.sol-card--gradient .gradient-line-h.bottom {
+    bottom: 1rem;
+}
+
+.sol-card--gradient .gradient-line-v {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(225, 29, 46, 0.2), rgba(255, 255, 255, 0.1), transparent);
+}
+
+.sol-card--gradient .gradient-line-v.left {
+    left: 0;
+}
+
+.sol-card--gradient .gradient-line-v.right {
+    right: 0;
+}
+
+/* Variant: Plus Icons */
+.sol-card--plus {
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    position: relative;
+}
+
+.sol-card--plus .plus-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    color: rgba(225, 29, 46, 0.5);
+    z-index: 10;
+}
+
+.sol-card--plus .plus-icon.tl {
+    top: -12px;
+    left: -12px;
+}
+
+.sol-card--plus .plus-icon.tr {
+    top: -12px;
+    right: -12px;
+}
+
+.sol-card--plus .plus-icon.bl {
+    bottom: -12px;
+    left: -12px;
+}
+
+.sol-card--plus .plus-icon.br {
+    bottom: -12px;
+    right: -12px;
+}
+
+/* Variant: Corner Borders */
+.sol-card--corners {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+.sol-card--corners .corner {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-color: rgba(225, 29, 46, 0.5);
+    z-index: 10;
+}
+
+.sol-card--corners .corner.tl {
+    top: -1px;
+    left: -1px;
+    border-left: 2px solid;
+    border-top: 2px solid;
+    border-top-left-radius: 0.375rem;
+}
+
+.sol-card--corners .corner.tr {
+    top: -1px;
+    right: -1px;
+    border-right: 2px solid;
+    border-top: 2px solid;
+    border-top-right-radius: 0.375rem;
+}
+
+.sol-card--corners .corner.bl {
+    bottom: -1px;
+    left: -1px;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    border-bottom-left-radius: 0.375rem;
+}
+
+.sol-card--corners .corner.br {
+    bottom: -1px;
+    right: -1px;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    border-bottom-right-radius: 0.375rem;
+}
+
+/* Variant: Dots Pattern */
+.sol-card--dots {
+    position: relative;
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    border-radius: 0.5rem;
+    padding: 1rem 1.5rem;
+}
+
+.sol-card--dots .dot-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #E11D2E;
+    box-shadow: 0 0 8px rgba(225, 29, 46, 0.6);
+    position: absolute;
+}
+
+.sol-card--dots .dot-indicator.tl {
+    top: -3px;
+    left: -3px;
+}
+
+.sol-card--dots .dot-indicator.tr {
+    top: -3px;
+    right: -3px;
+}
+
+.sol-card--dots .dot-indicator.bl {
+    bottom: -3px;
+    left: -3px;
+}
+
+.sol-card--dots .dot-indicator.br {
+    bottom: -3px;
+    right: -3px;
+}
+
+/* Card hover effects */
+.sol-card:hover {
+    transform: translateY(-2px);
+}
+
+.sol-card--plus:hover {
+    border-color: rgba(225, 29, 46, 0.3);
+}
+
+.sol-card--corners:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.sol-card--corners:hover .corner {
+    border-color: #E11D2E;
+}
+
+/* --- HEADING LINE-MASK REVEAL (Apple/Linear Style) --- */
+.reveal-mask {
+    overflow: hidden;
+}
+
+.reveal-mask .reveal-line {
+    display: block;
+    will-change: transform;
+}
+
+/* Fade-up utility for staggered entrances */
+.fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Raster scan line effect for Value Intelligence */
+.raster-heading {
+    position: relative;
+    overflow: hidden;
+}
+
+.raster-heading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #E11D2E, transparent);
+    opacity: 0;
+    animation: raster-scan 3s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes raster-scan {
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* --- COMPREHENSIVE RESPONSIVE DESIGN --- */
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    .editorial-title {
+        font-size: 2.2rem !important;
+        margin-bottom: 2rem;
+    }
+
+    .industry-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .industry-card.group.lg\:col-span-2 {
+        grid-column: span 2;
+    }
+
+    .solution-impact-container {
+        padding: 2rem;
+    }
+
+    .split-pane-wrapper {
+        gap: 2rem;
+    }
+
+    .sticky-showcase-sidebar h2 {
+        font-size: 4rem !important;
+    }
+}
+
+/* Mobile (max 767px) */
+@media (max-width: 767px) {
+    .editorial-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 1.5rem;
+    }
+
+    .industry-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .industry-card.group.lg\:col-span-2 {
+        grid-column: span 1;
+    }
+
+    .industry-card {
+        padding: 1.5rem;
+    }
+
+    .industry-card h4 {
+        font-size: 1.25rem;
+    }
+
+    .industry-card i {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .sol-card-content {
+        padding: 1rem;
+    }
+
+    .solution-impact-container {
+        padding: 1.5rem;
+        border-radius: 1rem;
+    }
+
+    .impact-insight-block {
+        padding: 1rem;
+    }
+
+    .split-pane-wrapper {
+        gap: 1.5rem;
+    }
+
+    .sticky-showcase-sidebar h2 {
+        font-size: 2.5rem !important;
+    }
+
+    .light-card {
+        border-radius: 1rem;
+    }
+
+    .card-header {
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .card-icon-box {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    .bento-footer {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .bento-item {
+        padding: 1.5rem;
+        border-radius: 1rem;
+    }
+
+    .footer-watermark-large {
+        font-size: 5rem;
+    }
+
+    .whatsapp-float {
+        bottom: 16px;
+        right: 16px;
+        width: 46px;
+        height: 46px;
+    }
+}
+
+/* Small Phones (max 480px) */
+@media (max-width: 480px) {
+    .editorial-title {
+        font-size: 1.5rem !important;
+    }
+
+    .sticky-showcase-sidebar h2 {
+        font-size: 2rem !important;
+    }
+
+    .focus-card {
+        width: 180px;
+        height: 250px;
+    }
+
+    .focus-rail-stage {
+        height: 260px;
+    }
+
+    .focus-rail-title {
+        font-size: 1.4rem;
+    }
+}
+
 
 .magnetic-icon {
     display: inline-flex;
@@ -1036,47 +1464,6 @@ h2,
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* WhatsApp Floating Button */
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25D366;
-    color: white;
-    border-radius: 50px;
-    padding: 12px 16px;
-    /* Initial round-ish */
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    z-index: 999;
-    /* Above intro overlay if needed, but usually below */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    width: 50px;
-    height: 50px;
-    white-space: nowrap;
-}
-
-.whatsapp-float:hover {
-    width: 220px;
-    gap: 10px;
-    padding: 12px 20px;
-    justify-content: center;
-}
-
-.whatsapp-text {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.whatsapp-float:hover .whatsapp-text {
-    opacity: 1;
-    transition-delay: 0.1s;
-}
 
 /* --- SVG Utilities --- */
 .fill-smartfy-red {

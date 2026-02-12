@@ -681,7 +681,7 @@ html.lenis {
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 2rem;
-    padding: 2.5rem;
+    padding: 1.25rem;
     transition: all 0.4s ease;
 }
 
@@ -910,10 +910,15 @@ h2,
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 1.5rem;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     overflow: hidden;
+    /* Keep glow inside */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
 }
 
 .industry-card::before {

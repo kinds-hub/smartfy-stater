@@ -752,9 +752,91 @@ function updateFocusRail() {
     if (railCounter) railCounter.innerText = `0${activeRailIndex + 1} / 0${totalRailItems}`;
 }
 
-// Init on load
+// --- 5. INDUSTRIES GLOWING EFFECT (React Port) ---
+function initIndustriesGlow() {
+    const cards = document.querySelectorAll('.industry-card');
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+        const glowLayer = card.querySelector('.glow-layer');
+        if (!glowLayer) return;
+
+        // Initialize variables
+        card.style.setProperty('--active', '0');
+        card.style.setProperty('--start', '0');
+
+        let isHovered = false;
+        let animationFrameId = null;
+
+        const handleMove = (e) => {
+            if (!isHovered) return;
+
+            const rect = card.getBoundingClientRect();
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            // React Port Parameters
+            const inactiveZone = 0.7;
+            const proximity = 0;
+
+            const centerX = rect.left + rect.width * 0.5;
+            const centerY = rect.top + rect.height * 0.5;
+            const distanceFromCenter = Math.hypot(mouseX - centerX, mouseY - centerY);
+
+            // The glow is disabled if the mouse is too close to the center
+            const inactiveRadius = 0.5 * Math.min(rect.width, rect.height) * inactiveZone;
+
+            if (distanceFromCenter < inactiveRadius) {
+                card.style.setProperty('--active', '0');
+                return;
+            }
+
+            const isActive =
+                mouseX > rect.left - proximity &&
+                mouseX < rect.right + proximity &&
+                mouseY > rect.top - proximity &&
+                mouseY < rect.bottom + proximity;
+
+            card.style.setProperty('--active', isActive ? '1' : '0');
+
+            if (isActive) {
+                const targetAngle = (Math.atan2(mouseY - centerY, mouseX - centerX) * 180 / Math.PI) + 90;
+                const currentAngle = parseFloat(card.style.getPropertyValue('--start')) || 0;
+                let angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
+                const newAngle = currentAngle + angleDiff;
+
+                gsap.to(card, {
+                    '--start': newAngle,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    overwrite: 'auto'
+                });
+            }
+        };
+
+        card.addEventListener('mouseenter', () => {
+            isHovered = true;
+            card.style.setProperty('--active', '1');
+        });
+
+        card.addEventListener('mouseleave', () => {
+            isHovered = false;
+            card.style.setProperty('--active', '0');
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isHovered) {
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                animationFrameId = requestAnimationFrame(() => handleMove(e));
+            }
+        });
+    });
+}
+
+// Update DOMContentLoaded to include the new initiative
 document.addEventListener('DOMContentLoaded', () => {
     initFocusRail();
+    initIndustriesGlow();
 });
 
 

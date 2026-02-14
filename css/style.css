@@ -1829,3 +1829,154 @@ h2,
     50% { opacity: 0.6; scale: 1.1; }
 }
 
+
+/* --- ADVANCED SHIMMER SYSTEM (Vanilla Port) --- */
+:root {
+    --shimmer-button-bg: rgba(11, 27, 61, 1);
+    --shimmer-button-color: #ffffff;
+    --shimmer-button-speed: 3s;
+    --shimmer-button-spread: 90deg;
+    --shimmer-button-radius: 100px;
+}
+
+@keyframes shimmer-spin-around {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes shimmer-slide {
+    0% { transform: translate(-50%, -50%) translate3d(0, 0, 0); }
+    100% { transform: translate(-50%, -50%) translate3d(0, 0, 0); }
+}
+
+.shimmer-btn-wrapper {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 2.5rem;
+    color: white;
+    background: var(--shimmer-button-bg);
+    border-radius: var(--shimmer-button-radius);
+    transition: transform 0.3s ease;
+}
+
+.shimmer-btn-wrapper:active {
+    transform: translateY(1px);
+}
+
+/* Spark Container */
+.shimmer-spark-container {
+    position: absolute;
+    inset: 0;
+    z-index: -30;
+    overflow: visible;
+    filter: blur(2px);
+}
+
+.shimmer-spark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    aspect-ratio: 1;
+    border-radius: 0;
+    animation: shimmer-spin-around var(--shimmer-button-speed) linear infinite;
+    background: conic-gradient(from calc(270deg - (var(--shimmer-button-spread) * 0.5)), transparent 0, var(--shimmer-button-color) var(--shimmer-button-spread), transparent var(--shimmer-button-spread));
+}
+
+/* Backdrop */
+.shimmer-btn-backdrop {
+    position: absolute;
+    inset: 1px; /* The "cut" size */
+    background: var(--shimmer-button-bg);
+    border-radius: inherit;
+    z-index: -20;
+}
+
+/* Highlight layer */
+.shimmer-highlight {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 -8px 10px rgba(255, 255, 255, 0.12);
+    transition: all 0.3s ease;
+}
+
+.shimmer-btn-wrapper:hover .shimmer-highlight {
+    box-shadow: inset 0 -6px 10px rgba(255, 255, 255, 0.25);
+}
+
+/* --- CARD SHIMMER VARIANT --- */
+.shimmer-card-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.shimmer-card-spark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    aspect-ratio: 1;
+    animation: shimmer-spin-around 8s linear infinite;
+    background: conic-gradient(from 0deg, transparent 0, rgba(225, 29, 46, 0.1) 45deg, transparent 90deg);
+    filter: blur(40px);
+}
+
+/* --- COLOR BALANCING: SOFT TECHNOLOGY CARDS --- */
+.light-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    border: 1px solid rgba(15, 36, 102, 0.08) !important;
+    box-shadow: 0 10px 25px -5px rgba(15, 36, 102, 0.05), 0 8px 10px -6px rgba(15, 36, 102, 0.03) !important;
+}
+
+.light-card .card-title {
+    color: #0F2466 !important; /* Brand Navy */
+    font-weight: 700;
+}
+
+.light-card .card-text {
+    color: #475569 !important; /* Soft Slate */
+    font-weight: 400;
+}
+
+.light-card .card-list li {
+    color: #475569 !important;
+    border-left: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.light-card .card-list li:hover {
+    color: #E11D2E !important;
+    padding-left: 0.5rem;
+    border-left: 2px solid #E11D2E;
+}
+
+.light-card .card-icon-box {
+    background: rgba(15, 36, 102, 0.04) !important;
+    color: #E11D2E !important;
+    border: 1px solid rgba(15, 36, 102, 0.05) !important;
+}
+
+.light-card .card-read-more {
+    color: #0F2466 !important;
+    opacity: 0.8;
+}
+
+.light-card .card-read-more:hover {
+    opacity: 1;
+    color: #E11D2E !important;
+}
+
+.light-card .card-watermark {
+    color: rgba(15, 36, 102, 0.03) !important;
+}
+

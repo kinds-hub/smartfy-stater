@@ -45,8 +45,10 @@
 <body class="antialiased">
 
     <!-- Global Background Systems -->
-    <!-- Global Background Systems REMOVED -->
-
+    <div class="bg-overlay-container">
+        <div class="dark-sphere-grid"></div>
+        <div class="noise-texture"></div>
+    </div>
 
     <!-- Liquid Progress Bar -->
     <div class="progress-container">
@@ -54,8 +56,21 @@
     </div>
 
     <!-- CINEMATIC INTRO -->
-    <!-- CINEMATIC INTRO REMOVED -->
-
+    <div id="intro-overlay">
+        <canvas id="intro-canvas"></canvas>
+        <div
+            class="relative z-50 flex flex-col items-center justify-center p-4 bg-smartfy-navy/20 backdrop-blur-sm rounded-xl border border-white/5">
+            <!-- Logo Reveal -->
+            <div class="intro-logo opacity-0 transform scale-90 mb-6 bg-white/90 p-4 rounded-xl shadow-2xl">
+                <img src="assets/images/%20smartify%20logo.png" alt="Smartfy Logo" class="h-24 md:h-32 w-auto">
+            </div>
+            <!-- Tagline -->
+            <p
+                class="intro-logo font-display font-medium text-lg md:text-xl text-blue-100 tracking-wider uppercase opacity-0 transform translate-y-4">
+                simplify things in a smart way.
+            </p>
+        </div>
+    </div>
 
     <!-- NAVIGATION -->
     <!-- NAVIGATION (SimpleHeader Adapted) -->
@@ -133,10 +148,8 @@
             <div class="hero-paths-container" id="hero-paths-1"></div>
             <div class="hero-paths-container" id="hero-paths-2"></div>
 
-
             <!-- Background Canvas -->
             <canvas id="hero-canvas" class="hero-canvas"></canvas>
-
 
             <div class="relative z-20 max-w-7xl mx-auto px-4 flex flex-col items-center text-center hero-content">
                 <!-- Removed Exposure Technology Badge -->
@@ -159,7 +172,7 @@
                     and <span class="font-mono text-white font-medium">Robotics</span>.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-5 mt-8">
+                <div class="flex flex-col sm:flex-row gap-5">
                     <a href="#technologies"
                         class="px-10 py-5 bg-smartfy-navy text-white rounded-full font-bold hover:bg-smartfy-red transition-all shadow-xl shadow-blue-900/30 flex items-center justify-center gap-3 group">
                         Explore Technologies
@@ -168,11 +181,15 @@
                 </div>
             </div>
 
-            <!-- Interactive Happy Red Glow REMOVED -->
-            <div
-                class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 opacity-0 pointer-events-none">
+            <!-- Interactive Happy Red Glow at End Side/Bottom -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30">
+                <span class="text-xs font-bold text-smartfy-red tracking-widest uppercase mb-2">Scroll</span>
+                <div class="w-6 h-10 border-2 border-smartfy-navy/20 rounded-full flex justify-center p-1 hero-pulse">
+                    <div class="w-1.5 h-1.5 bg-smartfy-red rounded-full animate-bounce"></div>
+                </div>
             </div>
         </section>
+
         <!-- BRAND WAVE SEPARATOR (Between Hero & Technologies) -->
         <div class="relative w-full overflow-hidden leading-none pointer-events-none -mt-1" style="z-index: 5;">
             <svg class="relative block w-[calc(100%+1.3px)] h-[150px]" data-name="Layer 1"
@@ -192,352 +209,153 @@
         </div>
 
         <!-- TECHNOLOGIES SHOWCASE -->
-        <section id="technologies" class="py-32 relative bg-pearl">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center gap-16">
+        <section id="technologies" class="py-64 relative bg-pearl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-                <!-- 1. Centered Header -->
-                <div class="text-center max-w-4xl mx-auto">
-                    <h2 class="font-display text-6xl md:text-8xl font-bold text-smartfy-navy leading-[0.9] mb-6">
-                        Technology<br>Foundation
-                    </h2>
-                    <p class="text-lg md:text-xl font-light text-[#475569] leading-relaxed max-w-2xl mx-auto mb-6">
-                        Our core competencies layered to create intelligent ecosystems that bridge the gap
-                        between hardware and human intuition.
-                    </p>
-                    <div
-                        class="flex items-center justify-center gap-4 text-smartfy-red font-mono text-sm tracking-widest uppercase">
-                        <span class="w-12 h-[1px] bg-smartfy-red"></span>
-                        Engineering Impact
-                        <span class="w-12 h-[1px] bg-smartfy-red"></span>
-                    </div>
-                </div>
-
-                <!-- 2. Infinite Scroll Text Cards -->
-                <div class="w-full relative overflow-hidden py-8">
-                    <!-- Gradient Mask Container -->
-                    <div class="scroll-container w-full">
-                        <div class="infinite-scroll flex gap-8 w-max items-stretch">
-                            <!-- Loop 1 -->
-                            <!-- AI -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-eye"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-cpu"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Artificial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Data intelligence, automation, predictive
-                                        systems.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Neural Decision Trees</li>
-                                        <li>Real-time Predictive Analytics</li>
-                                        <li>Semantic Data Processing</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- IoT -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-wifi"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-diagram-3"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Internet<br>of Things</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Enables real-time intelligence & connectivity.
-                                    </p>
-                                    <ul class="card-list text-sm">
-                                        <li>
-                                            < 15ms Latency Mesh</li>
-                                        <li>End-to-End AES Security</li>
-                                        <li>Smartfy-Mesh™ Protocol</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Geospatial -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-globe"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-geo-alt"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Geospatial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Precise spatial mapping & digital twins.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>3D High-Res Mapping</li>
-                                        <li>Location Strategy</li>
-                                        <li>Coordinate Sync Systems</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Robotics -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-robot"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-gear-wide-connected"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Advanced<br>Robotics</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Autonomous units for industrial efficiency.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Drone Fleet Ops</li>
-                                        <li>Automated Inspection</li>
-                                        <li>Precision Actuators</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Loop 2 (Duplicate) -->
-                            <!-- AI -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-eye"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-cpu"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Artificial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Data intelligence, automation, predictive
-                                        systems.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Neural Decision Trees</li>
-                                        <li>Real-time Predictive Analytics</li>
-                                        <li>Semantic Data Processing</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- IoT -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-wifi"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-diagram-3"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Internet<br>of Things</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Enables real-time intelligence & connectivity.
-                                    </p>
-                                    <ul class="card-list text-sm">
-                                        <li>
-                                            < 15ms Latency Mesh</li>
-                                        <li>End-to-End AES Security</li>
-                                        <li>Smartfy-Mesh™ Protocol</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Geospatial -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-globe"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-geo-alt"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Geospatial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Precise spatial mapping & digital twins.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>3D High-Res Mapping</li>
-                                        <li>Location Strategy</li>
-                                        <li>Coordinate Sync Systems</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Robotics -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-robot"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-gear-wide-connected"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Advanced<br>Robotics</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Autonomous units for industrial efficiency.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Drone Fleet Ops</li>
-                                        <li>Automated Inspection</li>
-                                        <li>Precision Actuators</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Loop 3 (Duplicate) -->
-                            <!-- AI -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-eye"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-cpu"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Artificial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Data intelligence, automation, predictive
-                                        systems.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Neural Decision Trees</li>
-                                        <li>Real-time Predictive Analytics</li>
-                                        <li>Semantic Data Processing</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- IoT -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-wifi"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-diagram-3"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Internet<br>of Things</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Enables real-time intelligence & connectivity.
-                                    </p>
-                                    <ul class="card-list text-sm">
-                                        <li>
-                                            < 15ms Latency Mesh</li>
-                                        <li>End-to-End AES Security</li>
-                                        <li>Smartfy-Mesh™ Protocol</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Geospatial -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-globe"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-geo-alt"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Geospatial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Precise spatial mapping & digital twins.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>3D High-Res Mapping</li>
-                                        <li>Location Strategy</li>
-                                        <li>Coordinate Sync Systems</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Robotics -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-robot"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-gear-wide-connected"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Advanced<br>Robotics</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Autonomous units for industrial efficiency.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Drone Fleet Ops</li>
-                                        <li>Automated Inspection</li>
-                                        <li>Precision Actuators</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <!-- 4. Floating Glass Quote Card -->
-                <div class="relative w-full max-w-4xl mx-auto mt-20 mb-32">
-                    <div class="card-bloom"></div>
-                    <div class="floating-glass-card">
-                        <p
-                            class="relative z-10 text-2xl md:text-4xl font-display font-medium italic leading-tight text-white mb-10">
-                            "Bringing life into this digital architecture through autonomous hardware systems that
-                            redefine human-machine interaction."
-                        </p>
-                        <div
-                            class="flex flex-col md:flex-row items-center justify-between gap-8 pt-8 border-t border-white/5 relative z-10">
-                            <div class="flex items-center gap-4">
-                                <div class="flex -space-x-3">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-smartfy-red/20 border border-smartfy-red/30 flex items-center justify-center text-[10px] font-bold text-smartfy-red backdrop-blur-md">
-                                        R01</div>
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-[10px] font-bold text-blue-400 backdrop-blur-md">
-                                        R02</div>
-                                </div>
-                                <div class="text-left">
-                                    <p class="text-xs font-mono uppercase tracking-[0.2em] text-slate-400">Autonomous
-                                        Status</p>
-                                    <p class="text-[10px] font-mono text-smartfy-red animate-pulse">SYSTEM_ACTIVE //
-                                        STABLE</p>
-                                </div>
-                            </div>
+                <div class="split-pane-wrapper">
+                    <!-- Left Pane: Sticky Editorial Title -->
+                    <div class="sticky-showcase-sidebar">
+                        <h2 class="font-display text-8xl md:text-9xl font-bold text-smartfy-navy leading-[0.85]">
+                            Technology<br>Foundation
+                        </h2>
+                        <div class="mt-12 max-w-sm">
+                            <p class="text-xl font-light text-[#475569] leading-relaxed">
+                                Our core competencies layered to create intelligent ecosystems that bridge the gap
+                                between
+                                hardware and human intuition.
+                            </p>
                             <div
-                                class="flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10">
-                                <span class="w-2 h-2 bg-smartfy-red rounded-full animate-ping"></span>
-                                <span class="text-[10px] font-mono uppercase tracking-widest text-slate-300">Harware
-                                    Core Sync</span>
+                                class="mt-8 flex items-center gap-4 text-smartfy-red font-mono text-sm tracking-widest uppercase">
+                                <span class="w-12 h-[1px] bg-smartfy-red"></span>
+                                Engineering Impact
                             </div>
                         </div>
                     </div>
-                </div>
 
+                    <!-- Right Pane: Smartify Tech Grid (11-Step Architectural Process) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-20">
+
+                        <!-- 01 AI -->
+                        <div class="light-card group">
+                            <div class="card-watermark"><i class="bi bi-eye"></i></div>
+                            <div class="card-header">
+                                <div class="card-icon-box">
+                                    <i class="bi bi-cpu"></i>
+                                </div>
+                                <h3 class="card-title">Artificial<br>Intelligence</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Data intelligence, automation, predictive systems.</p>
+                                <ul class="card-list">
+                                    <li>Neural Decision Trees</li>
+                                    <li>Real-time Predictive Analytics</li>
+                                    <li>Semantic Data Processing</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="card-read-more">Read Impact <i
+                                        class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- 02 IoT -->
+                        <div class="light-card group">
+                            <div class="card-watermark"><i class="bi bi-wifi"></i></div>
+                            <div class="card-header">
+                                <div class="card-icon-box">
+                                    <i class="bi bi-diagram-3"></i>
+                                </div>
+                                <h3 class="card-title">Internet<br>of Things</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Enables real-time intelligence & connectivity.</p>
+                                <ul class="card-list">
+                                    <li>
+                                        < 15ms Latency Mesh</li>
+                                    <li>End-to-End AES Security</li>
+                                    <li>Smartfy-Mesh™ Protocol</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="card-read-more">Read Impact <i
+                                        class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- 03 Geospatial -->
+                        <div class="light-card group">
+                            <div class="card-watermark"><i class="bi bi-globe"></i></div>
+                            <div class="card-header">
+                                <div class="card-icon-box">
+                                    <i class="bi bi-geo-alt"></i>
+                                </div>
+                                <h3 class="card-title">Geospatial<br>Intelligence</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Precise spatial mapping & digital twins.</p>
+                                <ul class="card-list">
+                                    <li>3D High-Res Mapping</li>
+                                    <li>Location Strategy</li>
+                                    <li>Coordinate Sync Systems</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="card-read-more">Read Impact <i
+                                        class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- 04 Robotics -->
+                        <div class="light-card group">
+                            <div class="card-watermark"><i class="bi bi-robot"></i></div>
+                            <div class="card-header">
+                                <div class="card-icon-box">
+                                    <i class="bi bi-gear-wide-connected"></i>
+                                </div>
+                                <h3 class="card-title">Advanced<br>Robotics</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Autonomous units for industrial efficiency.</p>
+                                <ul class="card-list">
+                                    <li>Drone Fleet Ops</li>
+                                    <li>Automated Inspection</li>
+                                    <li>Precision Actuators</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="card-read-more">Read Impact <i
+                                        class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="p-12 bg-smartfy-navy rounded-3xl text-white relative overflow-hidden">
+                        <div
+                            class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/blueprint.png')]">
+                        </div>
+                        <p class="relative z-10 text-2xl md:text-4xl font-light italic leading-tight">
+                            "Bringing life into this digital architecture through autonomous hardware
+                            systems
+                            that redefine human-machine interaction."
+                        </p>
+                        <div class="mt-8 flex items-center gap-6">
+                            <div class="flex -space-x-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-smartfy-red border-2 border-smartfy-navy flex items-center justify-center text-[10px] font-bold">
+                                    R01</div>
+                                <div
+                                    class="w-10 h-10 rounded-full bg-slate-700 border-2 border-smartfy-navy flex items-center justify-center text-[10px] font-bold">
+                                    R02</div>
+                            </div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-slate-400">Autonomous
+                                Units Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+            </div>
 
             </div>
         </section>
@@ -691,11 +509,12 @@
         <section id="industries" class="py-32 relative overflow-hidden bg-[#020617]">
             <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
                 <!-- Section Header -->
-                <div class="mb-8 text-center pt-16 md:pt-24">
-                    <h2 class="editorial-title reveal-mask !text-4xl md:!text-5xl text-white">
+                <div class="mb-16 text-center">
+                    <span class="font-mono text-smartfy-red text-xs tracking-[0.3em] uppercase">05 // Industries</span>
+                    <h2 class="editorial-title reveal-mask !text-4xl md:!text-5xl mt-4 text-white">
                         <span class="reveal-line">Sectors We Serve</span>
                     </h2>
-                    <p class="text-white/50 mt-2 max-w-2xl mx-auto fade-up">Delivering vertical-specific intelligence
+                    <p class="text-white/50 mt-4 max-w-2xl mx-auto fade-up">Delivering vertical-specific intelligence
                         across agriculture, healthcare, education, energy, and urban infrastructure.</p>
                 </div>
 
@@ -706,7 +525,8 @@
                         <h4>Agriculture</h4>
                         <p>Precision farming through IoT sensors, geospatial crop monitoring, and AI-driven soil
                             analysis for sustainable, data-backed agricultural management.</p>
-
+                        <div class="mt-4 font-mono text-[10px] text-white/20 tracking-widest uppercase">SYS_TAG:
+                            SMART_FARMING</div>
                     </div>
 
                     <!-- Healthcare -->
@@ -715,7 +535,8 @@
                         <h4>Healthcare</h4>
                         <p>AI-powered diagnostics, telemedicine platforms, and real-time patient monitoring systems
                             transforming clinical workflows and remote care delivery.</p>
-
+                        <div class="mt-4 font-mono text-[10px] text-white/20 tracking-widest uppercase">SYS_TAG:
+                            AI_HEALTH</div>
                     </div>
 
                     <!-- Education -->
@@ -724,7 +545,8 @@
                         <h4>Education</h4>
                         <p>Robotics laboratories, STEM curriculum integration, and adaptive learning platforms preparing
                             the next generation through immersive educational technology.</p>
-
+                        <div class="mt-4 font-mono text-[10px] text-white/20 tracking-widest uppercase">SYS_TAG:
+                            EDU_TECH</div>
                     </div>
 
                     <!-- Energy -->
@@ -733,7 +555,8 @@
                         <h4>Energy</h4>
                         <p>Solar installation, smart grid monitoring, energy auditing, and consumption optimization for
                             clean power sustainability at institutional and commercial scale.</p>
-
+                        <div class="mt-4 font-mono text-[10px] text-white/20 tracking-widest uppercase">SYS_TAG:
+                            CLEAN_ENERGY</div>
                     </div>
 
                     <!-- SMEs & Smart Cities -->
@@ -744,7 +567,8 @@
                                 <h4>SMEs & Smart Cities</h4>
                                 <p>Business process automation, ERP consulting, smart urban infrastructure, and
                                     IoT-connected community networks for scalable digital governance.</p>
-
+                                <div class="mt-4 font-mono text-[10px] text-white/20 tracking-widest uppercase">SYS_TAG:
+                                    URBAN_INTELLIGENCE</div>
                             </div>
                         </div>
                     </div>
@@ -756,17 +580,18 @@
         <section id="solutions" class="py-32 relative bg-[#0B1B3D]/30">
             <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
                 <!-- Section Header -->
-                <div class="mb-8 text-center">
-                    <h2 class="editorial-title reveal-mask !text-4xl md:!text-5xl text-white">
+                <div class="mb-16 text-center">
+                    <span class="font-mono text-smartfy-red text-xs tracking-[0.3em] uppercase">06 // Solutions</span>
+                    <h2 class="editorial-title reveal-mask !text-4xl md:!text-5xl mt-4 text-white">
                         <span class="reveal-line">What We Build</span>
                     </h2>
-                    <p class="text-white/50 mt-2 max-w-2xl mx-auto fade-up">End-to-end energy intelligence and digital
+                    <p class="text-white/50 mt-4 max-w-2xl mx-auto fade-up">End-to-end energy intelligence and digital
                         consulting — from solar infrastructure to brand strategy.</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
                     <!-- Smartify Energies -->
-                    <div class="space-y-8 text-center">
+                    <div class="space-y-8">
                         <div>
                             <h3 class="font-mono text-smartfy-red text-sm tracking-[0.3em] uppercase mb-2">Smartify
                                 Energies</h3>
@@ -774,10 +599,9 @@
                                 <span class="reveal-line">Clean Power <span class="text-white/20">•</span> Smart Energy
                                     <span class="text-white/20">•</span> Sustainability</span>
                             </h2>
-                            <p class="text-white/60 text-lg leading-relaxed fade-up max-w-[80%] mx-auto">We deliver
-                                intelligent clean energy solutions — from solar panel systems and smart meter
-                                integration to full energy independence consulting for homes, institutions, and
-                                businesses.</p>
+                            <p class="text-white/60 text-lg leading-relaxed fade-up">We deliver intelligent clean energy
+                                solutions — from solar panel systems and smart meter integration to full energy
+                                independence consulting for homes, institutions, and businesses.</p>
                         </div>
 
                         <div class="space-y-5">
@@ -835,7 +659,7 @@
                     </div>
 
                     <!-- Smartify Digital & Consulting -->
-                    <div class="space-y-8 text-center">
+                    <div class="space-y-8">
                         <div>
                             <h3 class="font-mono text-smartfy-red text-sm tracking-[0.3em] uppercase mb-2">Digital &
                                 Consulting</h3>
@@ -843,9 +667,9 @@
                                 <span class="reveal-line">Creative <span class="text-white/20">•</span> Strategy <span
                                         class="text-white/20">•</span> IT Advisory</span>
                             </h2>
-                            <p class="text-white/60 text-lg leading-relaxed fade-up max-w-[80%] mx-auto">Website
-                                development, digital marketing, ERP implementation, and technology strategy consulting —
-                                building modern competitive advantage through creative digital presence.</p>
+                            <p class="text-white/60 text-lg leading-relaxed fade-up">Website development, digital
+                                marketing, ERP implementation, and technology strategy consulting — building modern
+                                competitive advantage through creative digital presence.</p>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -952,83 +776,122 @@
         <div class="footer-watermark-large">smartfy</div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- Unified Horizontal Footer Card -->
-            <div
-                class="w-full bento-item flex flex-col lg:flex-row items-center justify-between gap-12 !p-12 relative overflow-hidden group hover:border-smartfy-red/30 transition-all duration-500">
+            <div class="bento-footer !gap-4">
 
-                <!-- Ambient Glow -->
-                <div
-                    class="absolute top-0 right-0 w-96 h-96 bg-smartfy-red/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 opacity-50 group-hover:opacity-100 transition-opacity duration-700">
-                </div>
-
-                <!-- LEFT: Join the Innovation (Newsletter) -->
-                <div class="flex-1 w-full max-w-lg relative z-10">
-                    <h4 class="font-display font-bold text-3xl text-white mb-4 border-l-4 border-smartfy-red pl-6">Join
-                        the Innovation</h4>
-                    <p class="text-slate-400 mb-8 font-light text-lg pl-1">Stay updated with our latest breakthroughs in
-                        AI and Robotics.</p>
-
-                    <form class="flex flex-col gap-4 pl-1">
-                        <div class="newsletter-field w-full">
-                            <input type="email" placeholder="Your email address"
-                                class="newsletter-input w-full !bg-white/5 !border-white/10 focus:!border-smartfy-red/50 text-white placeholder-slate-500">
-                            <div class="newsletter-static-line"></div>
-                            <div class="newsletter-underline"></div>
-                        </div>
-                        <button type="button"
-                            class="mt-2 py-4 px-8 bg-smartfy-navy text-white font-bold rounded-xl hover:bg-smartfy-red transition-all shadow-xl flex justify-between items-center group overflow-hidden relative text-sm border border-white/10">
-                            <span class="relative z-10 transition-transform group-hover:translate-x-1">Subscribe to
-                                Intelligence</span>
-                            <i
-                                class="bi bi-arrow-right relative z-10 group-hover:translate-x-3 transition-transform text-lg"></i>
-                        </button>
-                    </form>
-                </div>
-
-                <!-- SEPARATOR (Desktop Only) -->
-                <div class="hidden lg:block w-[1px] h-64 bg-gradient-to-b from-transparent via-white/10 to-transparent">
-                </div>
-
-                <!-- RIGHT: Brand Identity & Links -->
-                <div
-                    class="flex-1 w-full flex flex-col items-center lg:items-end text-center lg:text-right gap-8 relative z-10">
-
-                    <div class="flex flex-col items-center lg:items-end gap-6">
-                        <img src="assets/images/%20smartify%20logo.png" alt="Smartfy"
-                            class="h-12 w-auto nav-logo-img opacity-80 hover:opacity-100 transition-opacity">
-                        <p class="text-slate-500 font-light text-sm max-w-sm leading-relaxed">
-                            Transforming technology into meaningful real-world impact. We architect intelligent
-                            ecosystems that bridge the gap between complex hardware and intuitive human experience.
+                <!-- Bento Column 1: Purpose & Magnetic Hub -->
+                <div class="bento-item md:col-span-5 flex flex-col justify-between gap-4">
+                    <div class="mb-6">
+                        <img src="assets/images/%20smartify%20logo.png" alt="Smartfy" class="h-10 w-auto nav-logo-img">
+                    </div>
+                    <div>
+                        <h3 class="font-display text-4xl font-bold text-smartfy-navy leading-tight text-navy-to-slate">
+                            Transforming technology into meaningful <span class="text-smartfy-red">real-world
+                                impact</span>.
+                        </h3>
+                        <p class="mt-6 text-slate-500 font-light text-lg">
+                            We architect intelligent ecosystems that bridge the gap between complex hardware and
+                            intuitive human experience.
                         </p>
                     </div>
 
+                    <!-- Magnetic Social Hub -->
                     <div class="flex gap-6">
-                        <a href="#"
-                            class="magnetic-icon w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-smartfy-red/10 border border-white/5 hover:border-smartfy-red/30 transition-all"
-                            aria-label="LinkedIn">
-                            <i class="bi bi-linkedin text-lg text-slate-400 hover:text-smartfy-red"></i>
+                        <a href="#" class="magnetic-icon" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin text-2xl"></i>
                         </a>
-                        <a href="#"
-                            class="magnetic-icon w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-smartfy-red/10 border border-white/5 hover:border-smartfy-red/30 transition-all"
-                            aria-label="Twitter X">
-                            <i class="bi bi-twitter-x text-lg text-slate-400 hover:text-smartfy-red"></i>
+                        <a href="#" class="magnetic-icon" aria-label="Twitter X">
+                            <i class="bi bi-twitter-x text-2xl"></i>
                         </a>
-                        <a href="mailto:contact@smartfy.com"
-                            class="magnetic-icon w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-smartfy-red/10 border border-white/5 hover:border-smartfy-red/30 transition-all"
-                            aria-label="Email">
-                            <i class="bi bi-envelope-at-fill text-lg text-slate-400 hover:text-smartfy-red"></i>
+                        <a href="mailto:contact@smartfy.com" class="magnetic-icon" aria-label="Email">
+                            <i class="bi bi-envelope-at-fill text-2xl"></i>
                         </a>
-                    </div>
-
-                    <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 text-xs text-slate-500 mt-2">
-                        <a href="#" class="hover:text-white transition-colors">Privacy Protocol</a>
-                        <a href="#" class="hover:text-white transition-colors">Terms of Governance</a>
-                        <span class="opacity-50">© 2026 Smartfy Technology</span>
                     </div>
                 </div>
 
-            </div>
-        </div>
+                <!-- Bento Column 2: Tech Pillars -->
+                <div class="bento-item md:col-span-3 flex flex-col gap-4">
+                    <h4 class="font-display font-bold text-xl text-smartfy-navy border-l-4 border-smartfy-red pl-4">Tech
+                        Pillars</h4>
+                    <ul class="space-y-4">
+                        <li
+                            class="group flex items-center gap-3 text-slate-600 hover:text-smartfy-red transition-all cursor-pointer">
+                            <span
+                                class="w-1.5 h-1.5 bg-smartfy-red rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                            Artificial Intelligence
+                        </li>
+                        <li
+                            class="group flex items-center gap-3 text-slate-600 hover:text-smartfy-red transition-all cursor-pointer">
+                            <span
+                                class="w-1.5 h-1.5 bg-smartfy-red rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                            Internet of Things
+                        </li>
+                        <li
+                            class="group flex items-center gap-3 text-slate-600 hover:text-smartfy-red transition-all cursor-pointer">
+                            <span
+                                class="w-1.5 h-1.5 bg-smartfy-red rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                            Geospatial Data
+                        </li>
+                        <li
+                            class="group flex items-center gap-3 text-slate-600 hover:text-smartfy-red transition-all cursor-pointer">
+                            <span
+                                class="w-1.5 h-1.5 bg-smartfy-red rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                            Robotics Architecture
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Bento Column 3: Divisions -->
+                <div class="bento-item md:col-span-4 flex flex-col justify-between gap-4">
+                    <div>
+                        <h4
+                            class="font-display font-bold text-xl text-smartfy-navy border-l-4 border-smartfy-red pl-4 mb-4">
+                            Join the Innovation</h4>
+                        <p class="text-slate-500 mb-4 font-light text-sm">Stay updated with our latest breakthroughs in
+                            AI and
+                            Robotics.</p>
+
+                        <form class="flex flex-col gap-2">
+                            <div class="newsletter-field">
+                                <input type="email" placeholder="Your email address" class="newsletter-input">
+                                <div class="newsletter-static-line"></div>
+                                <div class="newsletter-underline"></div>
+                            </div>
+                            <button type="button"
+                                class="mt-2 py-3 px-6 bg-smartfy-navy text-white font-bold rounded-xl hover:bg-smartfy-red transition-all shadow-xl flex justify-between items-center group overflow-hidden relative text-sm">
+                                <span class="relative z-10 transition-transform group-hover:translate-x-1">Subscribe to
+                                    Intelligence</span>
+                                <i
+                                    class="bi bi-arrow-right relative z-10 group-hover:translate-x-3 transition-transform"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Industries</h5>
+                            <ul class="text-sm space-y-2 text-slate-600">
+                                <li class="hover:text-smartfy-red cursor-pointer">Energies</li>
+                                <li class="hover:text-smartfy-red cursor-pointer">Digital Strategy</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Ecosystem</h5>
+                            <ul class="text-sm space-y-2 text-slate-600">
+                                <li class="hover:text-smartfy-red cursor-pointer">Smart Future</li>
+                                <li class="hover:text-smartfy-red cursor-pointer">Electronics</li>
+                        </div>
+
+                        <!-- Footer Bottom -->
+                        <div
+                            class="mt-16 pt-8 border-t border-slate-200/50 flex flex-col md:flex-row justify-between items-center gap-6">
+                            <p class="text-slate-400 text-sm">© 2026 Smartfy Technology. Built for the
+                                architectural age.</p>
+                            <div class="flex gap-8 text-sm text-slate-400">
+                                <a href="#" class="hover:text-smartfy-red transition-colors">Privacy Protocol</a>
+                                <a href="#" class="hover:text-smartfy-red transition-colors">Terms of Governance</a>
+                            </div>
+                        </div>
+                    </div>
     </footer>
 
     <!-- WhatsApp Floating Button -->

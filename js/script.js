@@ -73,88 +73,8 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// --- 1. CINEMATIC INTRO ---
-const introCanvas = document.getElementById('intro-canvas');
-const introCtx = introCanvas.getContext('2d');
-let introWidth = window.innerWidth;
-let introHeight = window.innerHeight;
-introCanvas.width = introWidth;
-introCanvas.height = introHeight;
+// --- 1. CINEMATIC INTRO REMOVED ---
 
-const introParticles = [];
-const introColors = ['#E11D2E', '#FFFFFF'];
-
-class IntroParticle {
-    constructor() {
-        this.reset();
-    }
-    reset() {
-        this.x = Math.random() * introWidth;
-        this.y = Math.random() * introHeight;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 1.5;
-        this.speedY = (Math.random() - 0.5) * 1.5;
-        this.color = introColors[Math.floor(Math.random() * introColors.length)];
-        this.alpha = Math.random() * 0.5 + 0.5;
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > introWidth || this.y < 0 || this.y > introHeight) {
-            this.reset();
-        }
-    }
-    draw() {
-        introCtx.globalAlpha = this.alpha;
-        introCtx.fillStyle = this.color;
-        introCtx.beginPath();
-        introCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        introCtx.fill();
-    }
-}
-
-// Create Intro Particles
-for (let i = 0; i < 120; i++) {
-    introParticles.push(new IntroParticle());
-}
-
-function animateIntro() {
-    introCtx.clearRect(0, 0, introWidth, introHeight);
-    introParticles.forEach(p => {
-        p.update();
-        p.draw();
-    });
-    if (document.getElementById('intro-overlay').style.display !== 'none') {
-        requestAnimationFrame(animateIntro);
-    }
-}
-animateIntro();
-
-// Intro Timeline
-const introTl = gsap.timeline();
-introTl.to(".intro-logo", {
-    scale: 1,
-    opacity: 1,
-    duration: 1.5,
-    ease: "power3.out",
-    delay: 0.5
-})
-    .to("#intro-overlay", {
-        yPercent: -100,
-        duration: 1.5,
-        ease: "power4.inOut",
-        onComplete: () => {
-            // Stop intro canvas loop after transition
-            document.getElementById('intro-overlay').style.display = 'none';
-        }
-    }, "+=0.5")
-    .from(".hero-content > *", {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out"
-    }, "-=0.8");
 
 
 // --- 2. HERO INTERACTIVE CANVAS (Connect Dots) ---
@@ -162,8 +82,10 @@ const heroCanvas = document.getElementById('hero-canvas');
 const heroCtx = heroCanvas.getContext('2d');
 let heroWidth = window.innerWidth;
 let heroHeight = window.innerHeight;
-heroCanvas.width = heroWidth;
-heroCanvas.height = heroHeight;
+if (heroCanvas) {
+    heroCanvas.width = heroWidth;
+    heroCanvas.height = heroHeight;
+}
 
 let mouse = { x: undefined, y: undefined };
 const nodes = [];
@@ -185,8 +107,9 @@ class Node {
         this.color = '#F1F5F9'; // White for Dark Mode
     }
     draw() {
+        if (!heroCtx) return;
         heroCtx.fillStyle = this.color;
-        heroCtx.globalAlpha = 0.4; // Slightly increased alpha
+        heroCtx.globalAlpha = 0.4;
         heroCtx.beginPath();
         heroCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         heroCtx.fill();
@@ -209,22 +132,20 @@ class Node {
                 const force = (200 - distance) / 200;
                 this.x += dx * force * 0.05;
                 this.y += dy * force * 0.05;
-            } else {
-                // Return to base position (subtle)
-                const dxBase = this.baseX - this.x;
-                const dyBase = this.baseY - this.y;
-                // this.x += dxBase * 0.01;
-                // this.y += dyBase * 0.01;
             }
         }
     }
 }
 
-for (let i = 0; i < 100; i++) {
-    nodes.push(new Node());
+// Only init if canvas exists
+if (heroCanvas) {
+    for (let i = 0; i < 100; i++) {
+        nodes.push(new Node());
+    }
 }
 
 function animateHero() {
+    if (!heroCtx || !heroCanvas) return;
     heroCtx.clearRect(0, 0, heroWidth, heroHeight);
 
     // Dynamic Mesh
@@ -270,6 +191,7 @@ function animateHero() {
     requestAnimationFrame(animateHero);
 }
 animateHero();
+
 
 
 // --- 3. NAVIGATION & MOBILE MENU (SimpleHeader Sheet) ---
@@ -346,10 +268,12 @@ ScrollTrigger.create({
 
 // Window Resize
 window.addEventListener('resize', () => {
-    heroWidth = heroCanvas.width = window.innerWidth;
-    heroHeight = heroCanvas.height = window.innerHeight;
-    introWidth = introCanvas.width = window.innerWidth;
-    introHeight = introCanvas.height = window.innerHeight;
+    if (heroCanvas) {
+        heroWidth = heroCanvas.width = window.innerWidth;
+        heroHeight = heroCanvas.height = window.innerHeight;
+    }
+    // introWidth = introCanvas.width = window.innerWidth;
+    // introHeight = introCanvas.height = window.innerHeight;
 });
 
 // --- 5. SIGNATURE FOOTER & ADVANCED INTERACTIONS ---

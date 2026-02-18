@@ -410,8 +410,7 @@ function initScrollReveal() {
     // 1. Text Block Sequencing (Apple Style: Heading then Paragraph)
     // "Headings must feel solid (Mask), Paragraphs must feel subordinate (Fade)"
     gsap.utils.toArray('[data-reveal="text-block"]').forEach(block => {
-        const heading = block.querySelectorAll('h1, h2, h3, h4, .reveal-mask');
-        const body = block.querySelectorAll('p, .typo-body');
+        const elements = block.querySelectorAll('h1, h2, h3, h4, h5, p, .reveal-mask, .typo-body');
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -421,34 +420,39 @@ function initScrollReveal() {
             }
         });
 
-        if (heading.length > 0) {
-            // Check if it's a masked reveal or standard slide
-            const isMasked = heading[0].classList.contains('reveal-mask');
-            if (isMasked) {
-                // The reveal-mask logic handles the inner lines, but we trigger it here if needed
-                // OR we can just standard animate the block if it's not pre-split
-                const lines = block.querySelectorAll('.reveal-line');
+        elements.forEach((el, i) => {
+            const isFirst = i === 0;
+            const delay = isFirst ? 0 : "-=0.58";
+
+            if (el.classList.contains('reveal-mask')) {
+                const lines = el.querySelectorAll('.reveal-line');
                 if (lines.length > 0) {
                     tl.fromTo(lines,
                         { y: "100%", opacity: 0 },
-                        { y: "0%", opacity: 1, duration: 0.7, stagger: 0.1, ease: "power2.out" }
+                        { y: "0%", opacity: 1, duration: 0.7, stagger: 0.1, ease: "power2.out" },
+                        delay
                     );
                 } else {
-                    tl.from(heading, { y: 40, opacity: 0, duration: 0.7, ease: "power2.out" });
+                    tl.from(el, { y: 40, opacity: 0, duration: 0.7, ease: "power2.out" }, delay);
                 }
+            } else if (el.classList.contains('reveal-horizontal')) {
+                tl.from(el, {
+                    x: 60,
+                    opacity: 0,
+                    duration: 0.9,
+                    ease: "power2.out"
+                }, delay);
+            } else if (el.tagName === 'P' || el.classList.contains('typo-body')) {
+                tl.from(el, {
+                    y: 10,
+                    opacity: 0,
+                    duration: 0.7,
+                    ease: "power2.out"
+                }, delay);
             } else {
-                tl.from(heading, { y: 40, opacity: 0, duration: 0.7, ease: "power2.out" });
+                tl.from(el, { y: 40, opacity: 0, duration: 0.7, ease: "power2.out" }, delay);
             }
-        }
-
-        if (body.length > 0) {
-            tl.from(body, {
-                y: 10,
-                opacity: 0,
-                duration: 0.7,
-                ease: "power2.out"
-            }, "-=0.58"); // 0.12s delay after 0.7s heading start (0.7 - 0.58 = 0.12)
-        }
+        });
     });
 
     // 2. Generic Section Reveals (Fallback)

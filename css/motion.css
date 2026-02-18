@@ -1,0 +1,156 @@
+/* 
+   Premium Motion Design System 
+   "Motion is not decoration. Motion is feedback."
+*/
+
+:root {
+    /* --- TIMING & EASING --- */
+    /* Apple-style ease-out for distinct, premium feel */
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-steady: cubic-bezier(0.33, 1, 0.68, 1);
+
+    /* Standard Durations */
+    --duration-micro: 200ms;
+    /* Hover, Focus, Click */
+    --duration-steady: 400ms;
+    /* State changes */
+    --duration-enter: 700ms;
+    /* Scroll, Load */
+
+    /* Metrics */
+    --scale-hover: 1.02;
+    /* Max 1.02 rule */
+    --scale-press: 0.98;
+    /* Max 0.98 rule */
+}
+
+/* --- MICRO-INTERACTIONS --- */
+
+/* Base class for interactive elements */
+.interactive-premium {
+    transition: transform var(--duration-micro) var(--ease-premium),
+        box-shadow var(--duration-micro) var(--ease-premium),
+        opacity var(--duration-micro) var(--ease-premium),
+        background-color var(--duration-micro) var(--ease-premium),
+        border-color var(--duration-micro) var(--ease-premium);
+    will-change: transform;
+    /* Hint for performance */
+}
+
+/* Hover State */
+.interactive-premium:hover {
+    transform: scale(var(--scale-hover));
+}
+
+/* Active/Press State */
+.interactive-premium:active {
+    transform: scale(var(--scale-press));
+}
+
+/* Focus State (Accessibility) */
+.interactive-premium:focus-visible {
+    outline: 2px solid var(--color-red, #E11D2E);
+    outline-offset: 4px;
+}
+
+/* Subtle Magnetic Lift (for cards) */
+.hover-lift {
+    transition: transform var(--duration-steady) var(--ease-premium),
+        box-shadow var(--duration-steady) var(--ease-premium);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* --- AMBIENT MOTION --- */
+
+/* Noise Texture Override */
+.noise-texture {
+    opacity: 0.015 !important;
+    /* Enforce 1.5% rule */
+    pointer-events: none;
+}
+
+/* Ultra-slow Gradient Drift */
+@keyframes drift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.ambient-drift {
+    animation: drift 60s ease infinite;
+    background-size: 200% 200%;
+}
+
+/* --- ACCESSIBILITY --- */
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --duration-micro: 0s;
+        --duration-steady: 0s;
+        --duration-enter: 0s;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .ambient-drift,
+    .noise-texture,
+    .hero-pulse,
+    .infinite-scroll {
+        animation: none !important;
+        display: none !important;
+    }
+}
+
+/* --- TYPOGRAPHY RHYTHM & LAYOUT --- */
+.section-padding {
+    padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.typo-heading {
+    margin-bottom: 0.75rem !important;
+    /* Strict gap */
+    display: block;
+}
+
+.typo-body {
+    margin-top: 0 !important;
+    max-width: 60ch;
+    /* Readable line length */
+    line-height: 1.6;
+    margin-inline: auto;
+    /* Center if block is centered */
+}
+
+/* Ensure masks behave correctly */
+.reveal-mask {
+    overflow: hidden;
+    display: block;
+}
+
+.hero-header {
+    line-height: 0.82 !important;
+    letter-spacing: -0.04em !important;
+}
+
+.hero-header .reveal-line {
+    display: block !important;
+}

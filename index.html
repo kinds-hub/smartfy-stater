@@ -40,7 +40,14 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-</head>
+
+    <!-- GSAP & Lenis (Smooth Scrolling) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js" defer></script>
+
+    <!-- Smooth Scroll Initialization -->
+    <!-- Smooth Scroll Logic handled in js/script.js -->
 
 <body class="antialiased">
 
@@ -70,12 +77,12 @@
 
             <!-- Desktop Links -->
             <div class="hidden lg:flex items-center gap-8">
-                <a href="#technologies" class="nav-ghost-link">Technologies</a>
-                <a href="#focus-rail-section" class="nav-ghost-link">Services</a>
-                <a href="#industries" class="nav-ghost-link">Industries</a>
-                <a href="#solutions" class="nav-ghost-link">Solutions</a>
-                <a href="#solutions" class="nav-ghost-link">Insights</a>
-                <a href="#contact" class="nav-ghost-link">Company</a>
+                <a href="#technologies" class="nav-ghost-link interactive-premium">Technologies</a>
+                <a href="#focus-rail-section" class="nav-ghost-link interactive-premium">Services</a>
+                <a href="#industries" class="nav-ghost-link interactive-premium">Industries</a>
+                <a href="#solutions" class="nav-ghost-link interactive-premium">Solutions</a>
+                <a href="#solutions" class="nav-ghost-link interactive-premium">Insights</a>
+                <a href="#contact" class="nav-ghost-link interactive-premium">Company</a>
 
                 <!-- Neon Button CTA -->
                 <a href="#contact"
@@ -143,15 +150,15 @@
                 <div class="mb-8"></div>
 
                 <h1
-                    class="font-display font-bold text-5xl md:text-7xl lg:text-9xl leading-tight mb-8 text-white tracking-tight hero-heading-anim">
-                    <span class="inline-block" id="hero-text-line-1">Smart Solutions.</span><br />
+                    class="font-display font-bold text-5xl md:text-7xl lg:text-9xl mb-8 text-white tracking-tight reveal-mask flex flex-col hero-header">
+                    <span class="reveal-line" id="hero-text-line-1">Smart Solutions.</span>
                     <span
-                        class="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-smartfy-red"
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-smartfy-red reveal-line"
                         id="hero-text-line-2">Real Impact.</span>
                 </h1>
 
-                <p
-                    class="font-sans text-lg md:text-2xl text-slate-400 max-w-4xl mb-12 font-light leading-relaxed tracking-wide">
+                <p class="font-sans text-lg md:text-2xl text-slate-400 max-w-4xl mb-12 font-light leading-relaxed tracking-wide"
+                    data-reveal="section">
                     Simplifying complex challenges by integrating <br>
                     <span class="font-mono text-white font-medium">AI</span>,
                     <span class="font-mono text-white font-medium">IoT</span>,
@@ -159,8 +166,9 @@
                     and <span class="font-mono text-white font-medium">Robotics</span>.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-5 mt-8">
-                    <a href="#technologies" class="shimmer-btn-wrapper group shadow-2xl shadow-blue-900/20">
+                <div class="flex flex-col sm:flex-row gap-5 mt-8" data-reveal="section">
+                    <a href="#technologies"
+                        class="shimmer-btn-wrapper group shadow-2xl shadow-blue-900/20 interactive-premium">
                         <div class="shimmer-spark-container">
                             <div class="shimmer-spark"></div>
                         </div>
@@ -204,305 +212,299 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center gap-16">
 
                 <!-- 1. Centered Header -->
-                <div class="text-center max-w-4xl mx-auto">
-                    <h2 class="font-display text-6xl md:text-8xl font-bold text-smartfy-navy leading-[0.9] mb-6">
+                <div class="text-center max-w-4xl mx-auto" data-reveal="text-block">
+                    <h2
+                        class="font-display text-6xl md:text-8xl font-bold text-smartfy-navy leading-[0.9] typo-heading">
                         Technology<br>Foundation
                     </h2>
-                    <p class="text-lg md:text-xl font-light text-[#475569] leading-relaxed max-w-2xl mx-auto mb-6">
+                    <p class="text-lg md:text-xl font-light text-[#475569] typo-body">
                         Our core competencies layered to create intelligent ecosystems that bridge the gap
                         between hardware and human intuition.
                     </p>
                     <div
                         class="flex items-center justify-center gap-4 text-smartfy-red font-mono text-sm tracking-widest uppercase">
-                        <span class="w-12 h-[1px] bg-smartfy-red"></span>
                         Engineering Impact
-                        <span class="w-12 h-[1px] bg-smartfy-red"></span>
                     </div>
                 </div>
 
-                <!-- 2. Infinite Scroll Text Cards -->
-                <div class="w-full relative overflow-hidden py-8">
-                    <!-- Gradient Mask Container -->
-                    <div class="scroll-container w-full">
-                        <div class="infinite-scroll flex gap-8 w-max items-stretch">
-                            <!-- Loop 1 -->
-                            <!-- AI -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-eye"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-cpu"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Artificial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Data intelligence, automation, predictive
-                                        systems.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Neural Decision Trees</li>
-                                        <li>Real-time Predictive Analytics</li>
-                                        <li>Semantic Data Processing</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- IoT -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-wifi"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-diagram-3"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Internet<br>of Things</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Enables real-time intelligence & connectivity.
-                                    </p>
-                                    <ul class="card-list text-sm">
-                                        <li>
-                                            < 15ms Latency Mesh</li>
-                                        <li>End-to-End AES Security</li>
-                                        <li>Smartfy-Mesh™ Protocol</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Geospatial -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-globe"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-geo-alt"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Geospatial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Precise spatial mapping & digital twins.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>3D High-Res Mapping</li>
-                                        <li>Location Strategy</li>
-                                        <li>Coordinate Sync Systems</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Robotics -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-robot"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-gear-wide-connected"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Advanced<br>Robotics</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Autonomous units for industrial efficiency.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Drone Fleet Ops</li>
-                                        <li>Automated Inspection</li>
-                                        <li>Precision Actuators</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
+                <!-- 2. Hub & Spoke Tech System (Replaces Grid) -->
+                <div
+                    class="relative w-full max-w-6xl mx-auto h-auto lg:h-[700px] mt-12 mb-20 hidden lg:block hub-system-container">
 
-                            <!-- Loop 2 (Duplicate) -->
-                            <!-- AI -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-eye"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-cpu"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Artificial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Data intelligence, automation, predictive
-                                        systems.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Neural Decision Trees</li>
-                                        <li>Real-time Predictive Analytics</li>
-                                        <li>Semantic Data Processing</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- IoT -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-wifi"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-diagram-3"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Internet<br>of Things</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Enables real-time intelligence & connectivity.
-                                    </p>
-                                    <ul class="card-list text-sm">
-                                        <li>
-                                            < 15ms Latency Mesh</li>
-                                        <li>End-to-End AES Security</li>
-                                        <li>Smartfy-Mesh™ Protocol</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Geospatial -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-globe"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-geo-alt"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Geospatial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Precise spatial mapping & digital twins.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>3D High-Res Mapping</li>
-                                        <li>Location Strategy</li>
-                                        <li>Coordinate Sync Systems</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
-                            <!-- Robotics -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-robot"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-gear-wide-connected"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Advanced<br>Robotics</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Autonomous units for industrial efficiency.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Drone Fleet Ops</li>
-                                        <li>Automated Inspection</li>
-                                        <li>Precision Actuators</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
-                            </div>
+                    <!-- SVG Connectors (Behind Everything) -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none z-0"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Gradient: Bright Red Start (Center) -> Transparent End (Card) -->
+                            <linearGradient id="beam-gradient-tl" x1="100%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" style="stop-color:#E11D2E; stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0B1B3D; stop-opacity:0.2" />
+                            </linearGradient>
+                            <linearGradient id="beam-gradient-bl" x1="100%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#E11D2E; stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0B1B3D; stop-opacity:0.2" />
+                            </linearGradient>
+                            <linearGradient id="beam-gradient-tr" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#E11D2E; stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0B1B3D; stop-opacity:0.2" />
+                            </linearGradient>
+                            <linearGradient id="beam-gradient-br" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#E11D2E; stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0B1B3D; stop-opacity:0.2" />
+                            </linearGradient>
 
-                            <!-- Loop 3 (Duplicate) -->
-                            <!-- AI -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-eye"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-cpu"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Artificial<br>Intelligence</h3>
-                                </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Data intelligence, automation, predictive
-                                        systems.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Neural Decision Trees</li>
-                                        <li>Real-time Predictive Analytics</li>
-                                        <li>Semantic Data Processing</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
+                            <filter id="neon-glow">
+                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- PATHS (Static Connectivity) -->
+                        <path id="path-tl" d="M280 200 C 350 200, 450 350, 500 350" stroke="url(#beam-gradient-tl)"
+                            fill="none" class="connector-beam" filter="url(#neon-glow)" />
+                        <path id="path-bl" d="M280 500 C 350 500, 450 350, 500 350" stroke="url(#beam-gradient-bl)"
+                            fill="none" class="connector-beam delay-1" filter="url(#neon-glow)" />
+                        <path id="path-tr" d="M850 200 C 780 200, 680 350, 630 350" stroke="url(#beam-gradient-tr)"
+                            fill="none" class="connector-beam delay-2" filter="url(#neon-glow)" />
+                        <path id="path-br" d="M850 500 C 780 500, 680 350, 630 350" stroke="url(#beam-gradient-br)"
+                            fill="none" class="connector-beam delay-3" filter="url(#neon-glow)" />
+
+                        <!-- ANIMATED DATA PACKETS (Flowing Dots) -->
+                        <circle r="4" fill="#E11D2E" class="data-packet">
+                            <animateMotion dur="3s" repeatCount="indefinite" rotate="auto" keyPoints="1;0"
+                                keyTimes="0;1">
+                                <mpath href="#path-tl" />
+                            </animateMotion>
+                        </circle>
+                        <circle r="4" fill="#E11D2E" class="data-packet" style="animation-delay: 1s;">
+                            <animateMotion dur="3s" repeatCount="indefinite" rotate="auto" keyPoints="1;0"
+                                keyTimes="0;1">
+                                <mpath href="#path-bl" />
+                            </animateMotion>
+                        </circle>
+                        <circle r="4" fill="#E11D2E" class="data-packet" style="animation-delay: 0.5s;">
+                            <animateMotion dur="3s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#path-tr" />
+                            </animateMotion>
+                        </circle>
+                        <circle r="4" fill="#E11D2E" class="data-packet" style="animation-delay: 1.5s;">
+                            <animateMotion dur="3s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#path-br" />
+                            </animateMotion>
+                        </circle>
+
+                        <!-- NODES (Distinct Visual Anchors) -->
+                        <!-- TL Node -->
+                        <g class="connector-node-group">
+                            <circle cx="280" cy="200" r="8" class="connector-node-outer" stroke="#E11D2E" fill="#0B1B3D"
+                                stroke-width="2" />
+                            <circle cx="280" cy="200" r="4" class="connector-node-inner" fill="#E11D2E" />
+                        </g>
+                        <!-- BL Node -->
+                        <g class="connector-node-group">
+                            <circle cx="280" cy="500" r="8" class="connector-node-outer" stroke="#E11D2E" fill="#0B1B3D"
+                                stroke-width="2" />
+                            <circle cx="280" cy="500" r="4" class="connector-node-inner" fill="#E11D2E" />
+                        </g>
+                        <!-- TR Node -->
+                        <g class="connector-node-group">
+                            <circle cx="850" cy="200" r="8" class="connector-node-outer" stroke="#E11D2E" fill="#0B1B3D"
+                                stroke-width="2" />
+                            <circle cx="850" cy="200" r="4" class="connector-node-inner" fill="#E11D2E" />
+                        </g>
+                        <!-- BR Node -->
+                        <g class="connector-node-group">
+                            <circle cx="850" cy="500" r="8" class="connector-node-outer" stroke="#E11D2E" fill="#0B1B3D"
+                                stroke-width="2" />
+                            <circle cx="850" cy="500" r="4" class="connector-node-inner" fill="#E11D2E" />
+                        </g>
+                    </svg>
+
+                    <!-- Central Sphere (Intense Glow Source) -->
+                    <div
+                        class="absolute left-1/2 top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 z-20 flex items-center justify-center">
+                        <!-- Pseudo-element in CSS creates massive glow behind -->
+                        <div
+                            class="w-full h-full rounded-full bg-gradient-to-br from-smartfy-red/20 via-black to-black shadow-[0_0_100px_rgba(225,29,46,0.6)] border border-white/10 relative overflow-hidden sphere-anim">
+                            <!-- Inner Core -->
+                            <div class="absolute inset-0 bg-smartfy-red/30 blur-2xl rounded-full animate-pulse-slow">
+                            </div>
+                            <div
+                                class="absolute inset-4 rounded-full border border-white/5 bg-black/60 backdrop-blur-md flex items-center justify-center z-10">
+                                <div class="text-center">
+                                    <i
+                                        class="bi bi-cpu text-6xl text-white drop-shadow-[0_0_20px_rgba(225,29,46,1)]"></i>
+                                    <p class="mt-3 text-sm font-mono text-smartfy-red tracking-[0.2em] font-bold">
+                                        SMARTIFY<br>CORE</p>
                                 </div>
                             </div>
-                            <!-- IoT -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-wifi"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-diagram-3"></i>
+                            <!-- Rings -->
+                            <div
+                                class="absolute inset-0 border-[3px] border-transparent border-t-smartfy-red rounded-full animate-spin-slow opacity-80">
+                            </div>
+                            <div
+                                class="absolute inset-6 border-[2px] border-transparent border-b-white/50 rounded-full animate-spin-reverse opacity-60">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 1: AI (Top Left) -->
+                    <!-- Double Card Strategy: Use pseudo-element via class 'hub-card-double' -->
+                    <div class="absolute top-[50px] left-[20px] w-72 hub-card hub-card-double z-30 group">
+                        <div class="hub-card-header">
+                            <h4 class="text-white font-display text-lg">Artificial Intelligence</h4>
+                            <span class="hub-badge bg-smartfy-red/20 text-smartfy-red">ACTIVE</span>
+                        </div>
+                        <div class="hub-card-body space-y-3">
+                            <div class="hub-list-item">
+                                <span class="w-2 h-2 rounded-full bg-smartfy-red animate-pulse mr-2"></span>
+                                <span class="text-slate-300 text-xs truncate">Neural Decision Trees</span>
+                            </div>
+                            <div class="hub-list-item">
+                                <span class="w-2 h-2 rounded-full bg-blue-400 mr-2"></span>
+                                <span class="text-slate-300 text-xs truncate">Predictive Analytics</span>
+                            </div>
+                            <div class="hub-list-item glass-highlight border-l-2 border-smartfy-red">
+                                <span class="text-white text-xs font-bold pl-2">Semantic Processing</span>
+                                <i class="bi bi-check-lg text-green-400 text-xs ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: IoT (Bottom Left) -->
+                    <div class="absolute bottom-[50px] left-[20px] w-72 hub-card hub-card-double z-30 group">
+                        <div class="hub-card-header">
+                            <h4 class="text-white font-display text-lg">Internet of Things</h4>
+                            <i class="bi bi-wifi text-smartfy-red"></i>
+                        </div>
+                        <div class="hub-card-body relative py-2">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="flex flex-col items-center">
+                                    <div
+                                        class="w-8 h-8 rounded bg-smartfy-red/10 flex items-center justify-center border border-smartfy-red/30">
+                                        <i class="bi bi-shield-lock text-smartfy-red text-xs"></i>
                                     </div>
-                                    <h3 class="card-title !text-2xl">Internet<br>of Things</h3>
+                                    <div class="h-8 w-[1px] bg-gradient-to-b from-smartfy-red to-transparent"></div>
                                 </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Enables real-time intelligence & connectivity.
-                                    </p>
-                                    <ul class="card-list text-sm">
-                                        <li>
-                                            < 15ms Latency Mesh</li>
-                                        <li>End-to-End AES Security</li>
-                                        <li>Smartfy-Mesh™ Protocol</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
+                                <div>
+                                    <p class="text-white text-xs font-bold">End-to-End AES</p>
+                                    <p class="text-[10px] text-slate-400">Security Protocol</p>
                                 </div>
                             </div>
-                            <!-- Geospatial -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-globe"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-geo-alt"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Geospatial<br>Intelligence</h3>
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-8 h-8 rounded bg-green-500/10 flex items-center justify-center border border-green-500/30">
+                                    <i class="bi bi-lightning-charge text-green-400 text-xs"></i>
                                 </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Precise spatial mapping & digital twins.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>3D High-Res Mapping</li>
-                                        <li>Location Strategy</li>
-                                        <li>Coordinate Sync Systems</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
+                                <div>
+                                    <p class="text-white text-xs font-bold">
+                                        < 15ms Latency</p>
+                                            <p class="text-[10px] text-slate-400">Mesh Network</p>
                                 </div>
                             </div>
-                            <!-- Robotics -->
-                            <div class="light-card group w-[350px] flex-shrink-0 h-auto">
-                                <div class="card-watermark"><i class="bi bi-robot"></i></div>
-                                <div class="card-header !pt-8 !pb-4">
-                                    <div class="card-icon-box !mb-4">
-                                        <i class="bi bi-gear-wide-connected"></i>
-                                    </div>
-                                    <h3 class="card-title !text-2xl">Advanced<br>Robotics</h3>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: Geospatial (Top Right) -->
+                    <div class="absolute top-[50px] right-[20px] w-80 hub-card hub-card-double z-30 group">
+                        <div class="hub-card-header">
+                            <h4 class="text-white font-display text-lg">Geospatial Intel</h4>
+                            <span class="text-green-400 text-xs font-mono">LIVE MAP</span>
+                        </div>
+                        <div class="hub-card-body">
+                            <div
+                                class="relative h-24 bg-black/20 rounded-lg overflow-hidden border border-white/5 mb-3">
+                                <!-- Fake Map Grid -->
+                                <div class="absolute inset-0 opacity-20"
+                                    style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 10px 10px;">
                                 </div>
-                                <div class="card-body !p-6 flex-grow">
-                                    <p class="card-text !mb-4 text-sm">Autonomous units for industrial efficiency.</p>
-                                    <ul class="card-list text-sm">
-                                        <li>Drone Fleet Ops</li>
-                                        <li>Automated Inspection</li>
-                                        <li>Precision Actuators</li>
-                                    </ul>
+                                <div class="absolute top-1/2 left-1/2 w-2 h-2 bg-smartfy-red rounded-full animate-ping">
                                 </div>
-                                <div class="card-footer !p-4">
-                                    <a href="#" class="card-read-more text-xs">Read Impact <i
-                                            class="bi bi-arrow-right-short text-smartfy-red text-xl group-hover:translate-x-1 transition-transform"></i></a>
-                                </div>
+                                <div class="absolute top-1/2 left-1/2 w-2 h-2 bg-white rounded-full"></div>
+                                <div class="absolute bottom-2 left-2 text-[9px] font-mono text-smartfy-red">LOC: 34.05,
+                                    -118.24</div>
                             </div>
+                            <div class="flex justify-between text-xs text-slate-300">
+                                <span>3D High-Res Mapping</span>
+                                <span class="text-white font-bold">Digital Twins</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: Robotics (Bottom Right) -->
+                    <div class="absolute bottom-[50px] right-[20px] w-80 hub-card hub-card-double z-30 group">
+                        <div class="hub-card-header">
+                            <h4 class="text-white font-display text-lg">Advanced Robotics</h4>
+                        </div>
+                        <div class="hub-card-body space-y-4">
+                            <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                                <span class="text-slate-300 text-xs">Drone Fleet Ops</span>
+                                <span
+                                    class="bg-green-500/20 text-green-300 text-[10px] px-2 py-0.5 rounded">ONLINE</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300 text-xs">Precision Actuators</span>
+                                <span class="text-smartfy-red text-xs font-mono">99.8% EFF</span>
+                            </div>
+                            <div class="w-full bg-white/10 h-1 rounded-full overflow-hidden mt-2">
+                                <div class="bg-smartfy-red h-full w-[85%]"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Mobile Fallback (Stack) -->
+                <div class="lg:hidden w-full space-y-6 relative z-10 px-4">
+                    <!-- AI -->
+                    <div class="hub-card w-full">
+                        <div class="hub-card-header">
+                            <h4 class="text-white font-display text-lg">AI Neural Core</h4>
+                            <span class="hub-badge">Active</span>
+                        </div>
+                        <div class="hub-card-body">
+                            <p class="text-slate-400 text-sm mb-4">Neural decision trees and predictive analytics.</p>
+                            <a href="#" class="text-smartfy-red text-xs font-bold uppercase">Explore AI <i
+                                    class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- IoT -->
+                    <div class="hub-card w-full">
+                        <div class="hub-card-header">
+                            <h4 class="text-white font-display text-lg">IoT Mesh</h4>
+                            <i class="bi bi-diagram-2 text-slate-400"></i>
+                        </div>
+                        <div class="hub-card-body">
+                            <p class="text-slate-400 text-sm mb-4">Hyper-connected mesh networks ensuring < 15ms
+                                    latency.</p>
+                                    <a href="#" class="text-smartfy-red text-xs font-bold uppercase">Explore IoT <i
+                                            class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- Geo -->
+                    <div class="hub-card w-full">
+                        <div class="hub-card-header">
+                            <h4 class="text-white font-display text-lg">Geospatial</h4>
+                            <span class="text-green-400 text-xs font-mono">Analytics</span>
+                        </div>
+                        <div class="hub-card-body">
+                            <p class="text-slate-400 text-sm mb-4">Layered coordinate mapping and digital twins.</p>
+                            <a href="#" class="text-smartfy-red text-xs font-bold uppercase">Explore Geo <i
+                                    class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- Robotics -->
+                    <div class="hub-card w-full">
+                        <div class="hub-card-header">
+                            <h4 class="text-white font-display text-lg">Robotics</h4>
+                        </div>
+                        <div class="hub-card-body">
+                            <p class="text-slate-400 text-sm mb-4">Autonomous actuators and operational fleets.</p>
+                            <a href="#" class="text-smartfy-red text-xs font-bold uppercase">Explore Robotics <i
+                                    class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -519,7 +521,7 @@
                         <p
                             class="relative z-10 text-2xl md:text-4xl font-display font-medium italic leading-tight text-white mb-10">
                             "Bringing life into this digital architecture through autonomous hardware systems that
-                            redefine human-machine interaction."
+                            redefine human machine interaction."
                         </p>
                         <div
                             class="flex flex-col md:flex-row items-center justify-between gap-8 pt-8 border-t border-white/5 relative z-10">
@@ -535,8 +537,8 @@
                                 <div class="text-left">
                                     <p class="text-xs font-mono uppercase tracking-[0.2em] text-slate-400">Autonomous
                                         Status</p>
-                                    <p class="text-[10px] font-mono text-smartfy-red animate-pulse">SYSTEM_ACTIVE //
-                                        STABLE</p>
+                                    <p class="text-[10px] font-mono text-smartfy-red animate-pulse">System Active
+                                        Stable</p>
                                 </div>
                             </div>
                             <div
@@ -587,7 +589,8 @@
                         <!-- Card 0 -->
                         <div class="focus-card group" data-index="0">
                             <div class="card-visual">
-                                <img src="assets/images/electronics-robotics.jpg" alt="Electronics" class="card-img"
+                                <img src="assets/images/ electronics and embedded1.jpg" alt="Electronics"
+                                    class="card-img" loading="lazy"
                                     onerror="this.src='https://placehold.co/600x800/0B1B3D/E11D2E?text=Robotics'">
                                 <div class="card-glass-overlay"></div>
                                 <div class="card-border"></div>
@@ -595,14 +598,14 @@
                             <div class="card-meta">
                                 <div class="technical-stamp">
                                     <div class="owl-eye-small"></div>
-                                    <span>SYS.01 // HARDWARE</span>
+                                    <span>Hardware</span>
                                 </div>
                             </div>
                         </div>
                         <!-- Card 1 -->
                         <div class="focus-card group" data-index="1">
                             <div class="card-visual">
-                                <img src="assets/images/software-ai.jpg" alt="AI" class="card-img"
+                                <img src="assets/images/ software.jpg" alt="AI" class="card-img" loading="lazy"
                                     onerror="this.src='https://placehold.co/600x800/0B1B3D/E11D2E?text=AI+Core'">
                                 <div class="card-glass-overlay"></div>
                                 <div class="card-border"></div>
@@ -610,14 +613,14 @@
                             <div class="card-meta">
                                 <div class="technical-stamp">
                                     <div class="owl-eye-small"></div>
-                                    <span>SYS.02 // NEURAL</span>
+                                    <span>Neural Core</span>
                                 </div>
                             </div>
                         </div>
                         <!-- Card 2 -->
                         <div class="focus-card group" data-index="2">
                             <div class="card-visual">
-                                <img src="assets/images/smart-future.jpg" alt="Future" class="card-img"
+                                <img src="assets/images/ smart future.jpg" alt="Future" class="card-img" loading="lazy"
                                     onerror="this.src='https://placehold.co/600x800/0B1B3D/E11D2E?text=Future'">
                                 <div class="card-glass-overlay"></div>
                                 <div class="card-border"></div>
@@ -625,14 +628,15 @@
                             <div class="card-meta">
                                 <div class="technical-stamp">
                                     <div class="owl-eye-small"></div>
-                                    <span>SYS.03 // EDU_INNO</span>
+                                    <span>Education</span>
                                 </div>
                             </div>
                         </div>
                         <!-- Card 3 -->
                         <div class="focus-card group" data-index="3">
                             <div class="card-visual">
-                                <img src="assets/images/energies.jpg" alt="Energies" class="card-img"
+                                <img src="assets/images/ smart energies.jpg" alt="Energies" class="card-img"
+                                    loading="lazy"
                                     onerror="this.src='https://placehold.co/600x800/0B1B3D/E11D2E?text=Energy'">
                                 <div class="card-glass-overlay"></div>
                                 <div class="card-border"></div>
@@ -640,14 +644,14 @@
                             <div class="card-meta">
                                 <div class="technical-stamp">
                                     <div class="owl-eye-small"></div>
-                                    <span>SYS.04 // SUSTAIN</span>
+                                    <span>Sustainability</span>
                                 </div>
                             </div>
                         </div>
                         <!-- Card 4 -->
                         <div class="focus-card group" data-index="4">
                             <div class="card-visual">
-                                <img src="assets/images/digital-strategy.jpg" alt="Digital" class="card-img"
+                                <img src="assets/images/ IoT.jpg" alt="Digital" class="card-img" loading="lazy"
                                     onerror="this.src='https://placehold.co/600x800/0B1B3D/E11D2E?text=Digital'">
                                 <div class="card-glass-overlay"></div>
                                 <div class="card-border"></div>
@@ -655,7 +659,7 @@
                             <div class="card-meta">
                                 <div class="technical-stamp">
                                     <div class="owl-eye-small"></div>
-                                    <span>SYS.05 // STRATEGY</span>
+                                    <span>Strategy</span>
                                 </div>
                             </div>
                         </div>
@@ -699,63 +703,92 @@
         </section>
 
         <!-- INDUSTRIES WE SERVE -->
-        <section id="industries" class="py-32 relative overflow-hidden bg-[#020617]">
+        <section id="industries" class="py-32 relative overflow-hidden bg-smartfy-navy">
+            <!-- Global Lighting System -->
+            <div class="industry-ambient-light"></div>
+
+            <!-- Global Noise Layer -->
+            <div class="industry-noise-texture"></div>
+
             <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
                 <!-- Section Header -->
-                <div class="mb-8 text-center pt-16 md:pt-24">
-                    <h2 class="editorial-title reveal-mask !text-4xl md:!text-5xl text-white">
-                        <span class="reveal-line">Sectors We Serve</span>
+                <div class="mb-16 text-center" data-reveal="text-block">
+                    <h2 class="editorial-title reveal-mask !text-4xl md:!text-5xl text-white typo-heading">
+                        <span class="reveal-line">Vertical Intelligence</span>
                     </h2>
-                    <p class="text-white/50 mt-2 max-w-2xl mx-auto fade-up">Delivering vertical-specific intelligence
-                        across agriculture, healthcare, education, energy, and urban infrastructure.</p>
+                    <p class="text-white/50 mt-4 max-w-2xl mx-auto typo-body text-lg">
+                        Delivering deep technical ecosystems across the foundations of modern society.
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 industry-grid">
-                    <!-- Agriculture -->
-                    <div class="industry-card group fade-up">
-                        <i class="bi bi-tree"></i>
-                        <h4>Agriculture</h4>
-                        <p>Precision farming through IoT sensors, geospatial crop monitoring, and AI-driven soil
-                            analysis for sustainable, data-backed agricultural management.</p>
-
+                <!-- Bento Grid -->
+                <div class="industry-bento-grid" data-reveal="stagger">
+                    <!-- 1. SMEs & Smart Cities (Primary Large) -->
+                    <div class="industry-bento-card card-large group" id="industry-cities">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="bi bi-buildings"></i>
+                            </div>
+                            <div class="card-text">
+                                <h3>SMEs & Smart Cities</h3>
+                                <p>Business process automation, ERP consulting, smart urban infrastructure, and IoT
+                                    connected community networks for scalable digital governance.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Healthcare -->
-                    <div class="industry-card group fade-up">
-                        <i class="bi bi-heart-pulse"></i>
-                        <h4>Healthcare</h4>
-                        <p>AI-powered diagnostics, telemedicine platforms, and real-time patient monitoring systems
-                            transforming clinical workflows and remote care delivery.</p>
-
+                    <!-- 2. Agriculture (Medium) -->
+                    <div class="industry-bento-card group">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="bi bi-tree"></i>
+                            </div>
+                            <div class="card-text">
+                                <h3>Agriculture</h3>
+                                <p>Precision farming through IoT sensors, geospatial crop monitoring, and AI driven soil
+                                    analysis.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Education -->
-                    <div class="industry-card group fade-up">
-                        <i class="bi bi-mortarboard"></i>
-                        <h4>Education</h4>
-                        <p>Robotics laboratories, STEM curriculum integration, and adaptive learning platforms preparing
-                            the next generation through immersive educational technology.</p>
-
+                    <!-- 3. Healthcare (Medium) -->
+                    <div class="industry-bento-card group">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="bi bi-heart-pulse"></i>
+                            </div>
+                            <div class="card-text">
+                                <h3>Healthcare</h3>
+                                <p>AI powered diagnostics, telemedicine platforms, and real-time patient monitoring
+                                    systems.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Energy -->
-                    <div class="industry-card group fade-up">
-                        <i class="bi bi-lightning-charge"></i>
-                        <h4>Energy</h4>
-                        <p>Solar installation, smart grid monitoring, energy auditing, and consumption optimization for
-                            clean power sustainability at institutional and commercial scale.</p>
-
+                    <!-- 4. Education (Medium) -->
+                    <div class="industry-bento-card group">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="bi bi-mortarboard"></i>
+                            </div>
+                            <div class="card-text">
+                                <h3>Education</h3>
+                                <p>Robotics laboratories, STEM curriculum integration, and adaptive learning platforms.
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- SMEs & Smart Cities -->
-                    <div class="industry-card group lg:col-span-2 fade-up">
-                        <div class="flex flex-col md:flex-row gap-6 md:items-center">
-                            <i class="bi bi-buildings !mb-0"></i>
-                            <div>
-                                <h4>SMEs & Smart Cities</h4>
-                                <p>Business process automation, ERP consulting, smart urban infrastructure, and
-                                    IoT-connected community networks for scalable digital governance.</p>
-
+                    <!-- 5. Energy (Medium) -->
+                    <div class="industry-bento-card group">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="bi bi-lightning-charge"></i>
+                            </div>
+                            <div class="card-text">
+                                <h3>Energy</h3>
+                                <p>Solar installation, smart grid monitoring, and energy auditing for clean power
+                                    sustainability.</p>
                             </div>
                         </div>
                     </div>
@@ -764,190 +797,122 @@
         </section>
 
         <!-- OUR SOLUTIONS -->
-        <section id="solutions" class="py-32 relative bg-[#0B1B3D]/30">
+        <!-- PREMIUM SOLUTIONS SECTION -->
+        <section id="solutions" class="py-32 relative bg-premium-gradient overflow-hidden">
+
+            <!-- Background Elements -->
+            <div
+                class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent">
+            </div>
+            <div
+                class="absolute -left-20 top-40 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 mix-blend-multiply filter pointer-events-none">
+            </div>
+            <div
+                class="absolute -right-20 bottom-40 w-96 h-96 bg-red-100 rounded-full blur-3xl opacity-50 mix-blend-multiply filter pointer-events-none">
+            </div>
+
             <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+
                 <!-- Section Header -->
-                <div class="mb-8 text-center">
-                    <h2 class="editorial-title reveal-mask !text-4xl md:!text-5xl text-white">
-                        <span class="reveal-line">What We Build</span>
+                <div class="mb-20 text-center max-w-3xl mx-auto" data-reveal="text-block">
+                    <h5 class="text-smartfy-red font-mono text-xs font-bold tracking-[0.2em] uppercase mb-4 fade-up">
+                        End to End Intelligence</h5>
+                    <h2 class="editorial-title reveal-mask !text-white !text-4xl md:!text-6xl typo-heading">
+                        <span class="reveal-line">Designed for Impact.</span>
                     </h2>
-                    <p class="text-white/50 mt-2 max-w-2xl mx-auto fade-up">End-to-end energy intelligence and digital
-                        consulting — from solar infrastructure to brand strategy.</p>
+                    <p class="text-white/90 text-xl leading-relaxed typo-body">
+                        We merge enterprise grade engineering with strategic design to build systems that scale,
+                        perform, and inspire.
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-                    <!-- Smartify Energies -->
-                    <div class="space-y-8 text-center">
-                        <div>
-                            <h3 class="font-mono text-smartfy-red text-sm tracking-[0.3em] uppercase mb-2">Smartify
-                                Energies</h3>
-                            <h2 class="editorial-title reveal-mask !text-3xl md:!text-4xl !mb-4">
-                                <span class="reveal-line">Clean Power <span class="text-white/20">•</span> Smart Energy
-                                    <span class="text-white/20">•</span> Sustainability</span>
-                            </h2>
-                            <p class="text-white/60 text-lg leading-relaxed fade-up max-w-[80%] mx-auto">We deliver
-                                intelligent clean energy solutions — from solar panel systems and smart meter
-                                integration to full energy independence consulting for homes, institutions, and
-                                businesses.</p>
-                        </div>
+                <div class="max-w-4xl mx-auto">
 
-                        <div class="space-y-5">
-                            <!-- Gradient Lines Card -->
-                            <div class="sol-card sol-card--gradient">
-                                <div class="gradient-line-h top"></div>
-                                <div class="gradient-line-h bottom"></div>
-                                <div class="gradient-line-v left"></div>
-                                <div class="gradient-line-v right"></div>
-                                <div class="sol-card-content flex items-start gap-4 py-6">
-                                    <i class="bi bi-sun text-smartfy-red text-xl mt-1"></i>
-                                    <div>
-                                        <h5 class="text-white font-bold font-['Space_Grotesk']">Solar energy systems
-                                        </h5>
-                                        <p class="text-white/40 text-sm mt-1">Customized renewable power for diverse
-                                            scale requirements.</p>
-                                    </div>
+                    <!-- Service Stack -->
+                    <div class="space-y-6 relative">
+                        <!-- Connecting Line for the vertical list -->
+                        <div class="absolute left-6 top-10 bottom-10 w-px bg-slate-200 lg:hidden"></div>
+
+                        <!-- Card 1: IT & Project Consulting -->
+                        <div class="premium-card fade-up">
+                            <div class="corner-tl"></div>
+                            <div class="corner-tr"></div>
+                            <div class="corner-bl"></div>
+                            <div class="corner-br"></div>
+                            <div class="solution-connector"></div>
+                            <div class="p-6 flex gap-6 items-start">
+                                <div class="premium-card-icon min-w-[48px]">
+                                    <i class="bi bi-code-square"></i>
                                 </div>
-                            </div>
-
-                            <!-- Dots Pattern Card -->
-                            <div class="sol-card sol-card--dots">
-                                <div class="dot-indicator tl"></div>
-                                <div class="dot-indicator tr"></div>
-                                <div class="dot-indicator bl"></div>
-                                <div class="dot-indicator br"></div>
-                                <div class="sol-card-content flex items-start gap-4">
-                                    <i class="bi bi-graph-up-arrow text-smartfy-red text-xl mt-1"></i>
-                                    <div>
-                                        <h5 class="text-white font-bold font-['Space_Grotesk']">Smart energy monitoring
-                                        </h5>
-                                        <p class="text-white/40 text-sm mt-1">Real-time usage tracking and optimization
-                                            analytics.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Corner Borders Card -->
-                            <div class="sol-card sol-card--corners">
-                                <div class="corner tl"></div>
-                                <div class="corner tr"></div>
-                                <div class="corner bl"></div>
-                                <div class="corner br"></div>
-                                <div class="sol-card-content flex items-start gap-4">
-                                    <i class="bi bi-shield-check text-smartfy-red text-xl mt-1"></i>
-                                    <div>
-                                        <h5 class="text-white font-bold font-['Space_Grotesk']">Energy efficiency
-                                            consulting</h5>
-                                        <p class="text-white/40 text-sm mt-1">Strategic advisory for long-term cost
-                                            reduction.</p>
-                                    </div>
+                                <div>
+                                    <h5 class="text-white font-bold text-lg mb-1 font-['Space_Grotesk']">IT and
+                                        Project Consulting</h5>
+                                    <p class="text-slate-500 text-sm leading-relaxed">Strategic implementation of
+                                        enterprise grade infrastructure and scalable software architectures.</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Smartify Digital & Consulting -->
-                    <div class="space-y-8 text-center">
-                        <div>
-                            <h3 class="font-mono text-smartfy-red text-sm tracking-[0.3em] uppercase mb-2">Digital &
-                                Consulting</h3>
-                            <h2 class="editorial-title reveal-mask !text-3xl md:!text-4xl !mb-4">
-                                <span class="reveal-line">Creative <span class="text-white/20">•</span> Strategy <span
-                                        class="text-white/20">•</span> IT Advisory</span>
-                            </h2>
-                            <p class="text-white/60 text-lg leading-relaxed fade-up max-w-[80%] mx-auto">Website
-                                development, digital marketing, ERP implementation, and technology strategy consulting —
-                                building modern competitive advantage through creative digital presence.</p>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Plus Card -->
-                            <div class="sol-card sol-card--plus">
-                                <svg class="plus-icon tl" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1">
-                                    <path d="M12 6v12m6-6H6" />
-                                </svg>
-                                <svg class="plus-icon tr" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1">
-                                    <path d="M12 6v12m6-6H6" />
-                                </svg>
-                                <svg class="plus-icon bl" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1">
-                                    <path d="M12 6v12m6-6H6" />
-                                </svg>
-                                <svg class="plus-icon br" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1">
-                                    <path d="M12 6v12m6-6H6" />
-                                </svg>
-                                <div class="sol-card-content">
-                                    <h5 class="text-white font-bold mb-2 font-['Space_Grotesk']">IT Consulting</h5>
-                                    <p class="text-white/40 text-xs">Strategic infrastructure and software
-                                        implementation.</p>
+                        <!-- Card 2: Technology Education -->
+                        <div class="premium-card fade-up" style="transition-delay: 100ms;">
+                            <div class="corner-tl"></div>
+                            <div class="corner-tr"></div>
+                            <div class="corner-bl"></div>
+                            <div class="corner-br"></div>
+                            <div class="solution-connector"></div>
+                            <div class="p-6 flex gap-6 items-start">
+                                <div class="premium-card-icon min-w-[48px]">
+                                    <i class="bi bi-mortarboard"></i>
                                 </div>
-                            </div>
-
-                            <!-- Gradient Card -->
-                            <div class="sol-card sol-card--gradient">
-                                <div class="gradient-line-h top"></div>
-                                <div class="gradient-line-h bottom"></div>
-                                <div class="gradient-line-v left"></div>
-                                <div class="gradient-line-v right"></div>
-                                <div class="sol-card-content">
-                                    <h5 class="text-white font-bold mb-2 font-['Space_Grotesk']">Graphic & Branding</h5>
-                                    <p class="text-white/40 text-xs">Creative identity systems and digital brand
-                                        presence.</p>
-                                </div>
-                            </div>
-
-                            <!-- Corners Card -->
-                            <div class="sol-card sol-card--corners">
-                                <div class="corner tl"></div>
-                                <div class="corner tr"></div>
-                                <div class="corner bl"></div>
-                                <div class="corner br"></div>
-                                <div class="sol-card-content">
-                                    <h5 class="text-white font-bold mb-2 font-['Space_Grotesk']">Social Management</h5>
-                                    <p class="text-white/40 text-xs">Targeted social media strategy and digital
-                                        engagement.</p>
-                                </div>
-                            </div>
-
-                            <!-- Dots Card -->
-                            <div class="sol-card sol-card--dots">
-                                <div class="dot-indicator tl"></div>
-                                <div class="dot-indicator tr"></div>
-                                <div class="dot-indicator bl"></div>
-                                <div class="dot-indicator br"></div>
-                                <div class="sol-card-content">
-                                    <h5 class="text-white font-bold mb-2 font-['Space_Grotesk']">Systems Advisory</h5>
-                                    <p class="text-white/40 text-xs">End-to-end project and technical system consulting.
-                                    </p>
+                                <div>
+                                    <h5 class="text-white font-bold text-lg mb-1 font-['Space_Grotesk']">
+                                        Technology Education & Youth Innovation</h5>
+                                    <p class="text-slate-500 text-sm leading-relaxed">Empowering the next generation
+                                        through hands on robotics and coding initiatives.</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Value Intelligence Conclusion -->
-                <div class="solution-impact-container">
-                    <div class="max-w-4xl">
-                        <div class="impact-insight-block">
-                            <h5 class="raster-heading">Value Intelligence // 01</h5>
-                            <p>Smart automation and AI-driven insights directly translate to reduced operational costs
-                                and improved decision-making intelligence across your entire infrastructure.</p>
+                        <!-- Card 3: Systems Advisory -->
+                        <div class="premium-card fade-up" style="transition-delay: 200ms;">
+                            <div class="corner-tl"></div>
+                            <div class="corner-tr"></div>
+                            <div class="corner-bl"></div>
+                            <div class="corner-br"></div>
+                            <div class="solution-connector"></div>
+                            <div class="p-6 flex gap-6 items-start">
+                                <div class="premium-card-icon min-w-[48px]">
+                                    <i class="bi bi-diagram-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-bold text-lg mb-1 font-['Space_Grotesk']">Systems
+                                        Advisory</h5>
+                                    <p class="text-slate-500 text-sm leading-relaxed">End to end technical architecture
+                                        planning to optimize workflows and reduce operational friction.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="impact-conclusion">
-                            <p>By integrating <strong>IoT</strong>, <strong>Robotics</strong>, and <strong>Geospatial
-                                    data</strong>, Smartify provides a unified partnership for achieving real-time
-                                productivity gains and highly scalable solutions that evolve with your business needs.
-                            </p>
+                        <!-- Card 4: Branding & Design -->
+                        <div class="premium-card fade-up" style="transition-delay: 300ms;">
+                            <div class="corner-tl"></div>
+                            <div class="corner-tr"></div>
+                            <div class="corner-bl"></div>
+                            <div class="corner-br"></div>
+                            <div class="solution-connector"></div>
+                            <div class="p-6 flex gap-6 items-start">
+                                <div class="premium-card-icon min-w-[48px]">
+                                    <i class="bi bi-palette"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-bold text-lg mb-1 font-['Space_Grotesk']">Branding
+                                        & Design</h5>
+                                    <p class="text-slate-500 text-sm leading-relaxed">Visual identity systems that build
+                                        market trust and communicate premium value at a glance.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <a href="#contact"
-                            class="mt-8 inline-flex items-center gap-3 px-10 py-4 bg-smartfy-red text-white font-mono text-xs font-bold tracking-[0.2em] hover:bg-white hover:text-smartfy-navy transition-all duration-500 rounded-sm">
-                            CONNECT WITH OUR EXPERTS
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -964,8 +929,8 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- Unified Horizontal Footer Card -->
-            <div
-                class="w-full bento-item flex flex-col lg:flex-row items-center justify-between gap-12 !p-12 relative overflow-hidden group hover:border-smartfy-red/30 transition-all duration-500">
+            <div class="w-full bento-item flex flex-col lg:flex-row items-center justify-between gap-12 !p-12 relative overflow-hidden group hover:border-smartfy-red/30 transition-all duration-500"
+                data-reveal="section">
 
                 <!-- Ambient Glow -->
                 <div
@@ -973,10 +938,13 @@
                 </div>
 
                 <!-- LEFT: Join the Innovation (Newsletter) -->
-                <div class="flex-1 w-full max-w-lg relative z-10">
-                    <h4 class="font-display font-bold text-3xl text-white mb-4 border-l-4 border-smartfy-red pl-6">Join
+                <div class="flex-1 w-full max-w-lg relative z-10" data-reveal="text-block">
+                    <h4
+                        class="font-display font-bold text-3xl text-white typo-heading border-l-4 border-smartfy-red pl-6">
+                        Join
                         the Innovation</h4>
-                    <p class="text-slate-400 mb-8 font-light text-lg pl-1">Stay updated with our latest breakthroughs in
+                    <p class="text-slate-400 typo-body font-light text-lg pl-1">Stay updated with our latest
+                        breakthroughs in
                         AI and Robotics.</p>
 
                     <form class="flex flex-col gap-4 pl-1">
@@ -1008,7 +976,7 @@
                         <img src="assets/images/%20smartify%20logo.png" alt="Smartfy"
                             class="h-12 w-auto nav-logo-img opacity-80 hover:opacity-100 transition-opacity">
                         <p class="text-slate-500 font-light text-sm max-w-sm leading-relaxed">
-                            Transforming technology into meaningful real-world impact. We architect intelligent
+                            Transforming technology into meaningful real world impact. We architect intelligent
                             ecosystems that bridge the gap between complex hardware and intuitive human experience.
                         </p>
                     </div>
@@ -1046,12 +1014,11 @@
 
 
     <!-- EXTERNAL SCRIPTS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <!-- Moved to Head with Defer -->
 
     <!-- MAIN SCRIPT -->
-    <script src="js/script.js"></script>
+    <script src="js/tech-anim.js" defer></script>
+    <script src="js/script.js" defer></script>
 </body>
 
 </html>

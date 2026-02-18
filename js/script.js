@@ -60,18 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // Initialize Lenis for Smooth "Butterfly" Scroll
 const lenis = new Lenis({
     duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Butterfly ease
     smooth: true,
     mouseMultiplier: 1,
-    smoothTouch: false,
     touchMultiplier: 2,
 });
 
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+// Sync Lenis with GSAP ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
+
+// Add Lenis's requestAnimationFrame to GSAP's ticker for performance
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+
+// Disable lag smoothing in GSAP to prevent jumps during smooth scroll
+gsap.ticker.lagSmoothing(0);
 
 // --- 1. CINEMATIC INTRO REMOVED ---
 
@@ -243,21 +247,7 @@ document.querySelectorAll('.nav-ghost-link, a[href^="#"].group').forEach(anchor 
 });
 
 
-// --- 4. SCROLL ANIMATIONS (Grid & Elements) ---
-gsap.utils.toArray('.glass-card').forEach((card, i) => {
-    gsap.from(card, {
-        scrollTrigger: {
-            trigger: card,
-            start: "top 90%",
-            toggleActions: "play none none reverse"
-        },
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        delay: i * 0.1
-    });
-});
+// [Removed old glass-card triggers in favor of unified system]
 
 // Update Header on Scroll
 ScrollTrigger.create({
@@ -316,23 +306,7 @@ tiltCards.forEach(card => {
 });
 
 // Staggered Pop-from-Down Reveal for Pillar Cards
-gsap.utils.toArray('.pillar-card').forEach((card) => {
-    const content = card.querySelectorAll('.relative.z-20 > *');
-
-    gsap.from(content, {
-        scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power4.out",
-        clearProps: "all"
-    });
-});
+// [Removed old pillar-card triggers in favor of unified system]
 
 // Refresh ScrollTrigger for new layout
 ScrollTrigger.refresh();
@@ -372,7 +346,7 @@ magnets.forEach(magnet => {
             x: 0,
             y: 0,
             duration: 0.8,
-            ease: "elastic.out(1, 0.3)"
+            ease: "power2.out"
         });
 
         const icon = magnet.querySelector('i');
@@ -388,105 +362,12 @@ magnets.forEach(magnet => {
         gsap.to(magnet.querySelector('i'), {
             rotation: 360,
             duration: 0.8,
-            ease: "back.out(1.7)"
+            ease: "power2.out"
         });
     });
 });
 
-// Staggered Entrance for Content Blocks
-if (window.innerWidth > 768) {
-    gsap.utils.toArray(['section > div', '.bento-item']).forEach((block) => {
-        gsap.from(block, {
-            scrollTrigger: {
-                trigger: block,
-                start: "top 85%",
-                toggleActions: "play none none reverse"
-            },
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-            clearProps: "all"
-        });
-    });
-
-    // Special Reveal for Industry Cards
-    gsap.from(".industry-card", {
-        scrollTrigger: {
-            trigger: ".industry-grid",
-            start: "top 80%",
-        },
-        y: 60,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 1.2,
-        ease: "power4.out",
-        clearProps: "all"
-    });
-
-    // Impact Container Reveal
-    gsap.from(".solution-impact-container", {
-        scrollTrigger: {
-            trigger: ".solution-impact-container",
-            start: "top 90%",
-        },
-        scale: 0.95,
-        opacity: 0,
-        duration: 1.5,
-        ease: "expo.out",
-        clearProps: "all"
-    });
-
-    // --- Line-Mask Reveal Animation (Apple/Linear Style) ---
-    document.querySelectorAll('.reveal-mask').forEach((mask) => {
-        const lines = mask.querySelectorAll('.reveal-line');
-        if (lines.length === 0) {
-            const content = mask.innerHTML;
-            mask.innerHTML = `<span class="reveal-line">${content}</span>`;
-        }
-        gsap.from(mask.querySelectorAll('.reveal-line'), {
-            scrollTrigger: {
-                trigger: mask,
-                start: "top 85%",
-            },
-            y: 60,
-            opacity: 0,
-            stagger: 0.12,
-            duration: 1.2,
-            ease: "power4.out",
-            clearProps: "all"
-        });
-    });
-
-    // --- Fade-Up Observer for Staggered Entrances ---
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                fadeObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-up').forEach((el, i) => {
-        el.style.transitionDelay = `${i * 0.08}s`;
-        fadeObserver.observe(el);
-    });
-
-    // Solution Card Stagger Entrance
-    gsap.from(".sol-card", {
-        scrollTrigger: {
-            trigger: "#solutions",
-            start: "top 75%",
-        },
-        y: 30,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
-        clearProps: "all"
-    });
-}
+// [Removed old scattered triggers in favor of unified system]
 
 // Footer Parallax (Slide out from underneath)
 gsap.from(".signature-footer", {
@@ -515,6 +396,147 @@ gsap.utils.toArray('.pillar-card').forEach((card, i) => {
     });
 });
 
+// --- 4. SCROLL ANIMATIONS (Unified Premium System) ---
+function initScrollReveal() {
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isReduced) {
+        gsap.set("[data-reveal]", { opacity: 1, y: 0 });
+        return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. Text Block Sequencing (Apple Style: Heading then Paragraph)
+    // "Headings must feel solid (Mask), Paragraphs must feel subordinate (Fade)"
+    gsap.utils.toArray('[data-reveal="text-block"]').forEach(block => {
+        const heading = block.querySelectorAll('h1, h2, h3, h4, .reveal-mask');
+        const body = block.querySelectorAll('p, .typo-body');
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: block,
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        if (heading.length > 0) {
+            // Check if it's a masked reveal or standard slide
+            const isMasked = heading[0].classList.contains('reveal-mask');
+            if (isMasked) {
+                // The reveal-mask logic handles the inner lines, but we trigger it here if needed
+                // OR we can just standard animate the block if it's not pre-split
+                const lines = block.querySelectorAll('.reveal-line');
+                if (lines.length > 0) {
+                    tl.fromTo(lines,
+                        { y: "100%", opacity: 0 },
+                        { y: "0%", opacity: 1, duration: 0.7, stagger: 0.1, ease: "power2.out" }
+                    );
+                } else {
+                    tl.from(heading, { y: 40, opacity: 0, duration: 0.7, ease: "power2.out" });
+                }
+            } else {
+                tl.from(heading, { y: 40, opacity: 0, duration: 0.7, ease: "power2.out" });
+            }
+        }
+
+        if (body.length > 0) {
+            tl.from(body, {
+                y: 10,
+                opacity: 0,
+                duration: 0.7,
+                ease: "power2.out"
+            }, "-=0.58"); // 0.12s delay after 0.7s heading start (0.7 - 0.58 = 0.12)
+        }
+    });
+
+    // 2. Generic Section Reveals (Fallback)
+    gsap.utils.toArray('[data-reveal="section"]').forEach(section => {
+        gsap.fromTo(section,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+
+    // 3. Staggered Children
+    gsap.utils.toArray('[data-reveal="stagger"]').forEach(container => {
+        const children = container.children;
+        gsap.fromTo(children,
+            { opacity: 0, y: 20 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.08,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+    // 4. Industry Bento Specific (Premium Motion)
+    const industryBento = document.querySelector('.industry-bento-grid');
+    if (industryBento) {
+        gsap.fromTo(industryBento.children,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                stagger: 0.1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: industryBento,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    }
+
+    // 4. Standalone Reveal Masks (if not inside text-block)
+    document.querySelectorAll('.reveal-mask').forEach((mask) => {
+        if (mask.closest('[data-reveal="text-block"]')) return; // handled by timeline
+
+        const lines = mask.querySelectorAll('.reveal-line');
+        if (lines.length === 0) {
+            const content = mask.innerHTML;
+            mask.innerHTML = `<span class="reveal-line">${content}</span>`;
+        }
+
+        gsap.fromTo(mask.querySelectorAll('.reveal-line'),
+            { y: "100%", opacity: 0 },
+            {
+                y: "0%",
+                opacity: 1,
+                stagger: 0.1,
+                duration: 0.8,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: mask,
+                    start: "top 85%",
+                }
+            }
+        );
+    });
+
+    ScrollTrigger.refresh();
+}
+
 // --- 4. FOCUS RAIL SYSTEM (React Port) ---
 const focusRailItems = [
     {
@@ -527,7 +549,7 @@ const focusRailItems = [
     {
         id: 1,
         title: "Software & <span class='opacity-40'>AI</span>",
-        desc: "AI-powered algorithms transforming data into decisions. Neural networks driving next-gen logic.",
+        desc: "AI powered algorithms transforming data into decisions. Neural networks driving next gen logic.",
         meta: "NEURAL_CORE",
         color: "rgba(56, 189, 248, 0.4)" // Cyan
     },
@@ -548,7 +570,7 @@ const focusRailItems = [
     {
         id: 4,
         title: "Digital <span class='opacity-40'>Strategy</span>",
-        desc: "Strategy & Branding presence. Connecting global networks with high-impact digital experiences.",
+        desc: "Strategy & Branding presence. Connecting global networks with high impact digital experiences.",
         meta: "CONNECTIVITY",
         color: "rgba(251, 146, 60, 0.4)" // Orange
     }
@@ -622,7 +644,7 @@ function updateFocusRail() {
             filter: `blur(${blur}px) brightness(${brightness})`,
             zIndex: zIndex,
             duration: 1.2, // Slower duration
-            ease: "power3.out", // Smoother easing (less snap)
+            ease: "power2.out", // Smoother easing (less snap)
             overwrite: 'auto'
         });
 
@@ -761,6 +783,61 @@ function initIndustriesGlow() {
 document.addEventListener('DOMContentLoaded', () => {
     initFocusRail();
     initIndustriesGlow();
+    init3DCornerCards();
+    initScrollReveal();
 });
+
+// --- 3D Corner Card Animations ---
+function init3DCornerCards() {
+    const cards = document.querySelectorAll('.premium-card');
+
+    cards.forEach((card, index) => {
+        // Entry animation
+        gsap.fromTo(card,
+            { y: 20, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: index * 0.1,
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    once: true
+                }
+            }
+        );
+
+        // 3D Tilt on hover
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const rotateX = (y / rect.height - 0.5) * -10;
+            const rotateY = (x / rect.width - 0.5) * 10;
+
+            gsap.to(card, {
+                rotateX: rotateX,
+                rotateY: rotateY,
+                duration: 0.3,
+                ease: "power2.out",
+                transformPerspective: 800,
+                transformStyle: "preserve-3d"
+            });
+        });
+
+        // Reset on leave
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                rotateX: 0,
+                rotateY: 0,
+                duration: 0.5,
+                ease: "power3.out"
+            });
+        });
+    });
+}
 
 

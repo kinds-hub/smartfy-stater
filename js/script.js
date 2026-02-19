@@ -789,7 +789,76 @@ document.addEventListener('DOMContentLoaded', () => {
     initIndustriesGlow();
     init3DCornerCards();
     initScrollReveal();
+    initContourParallax();
+    initPremiumCardCursorGlow();
 });
+
+// --- PREMIUM CARD CURSOR LIGHT REFLECTION ---
+function initPremiumCardCursorGlow() {
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = document.querySelectorAll('#solutions .premium-card');
+    if (!cards.length || isReduced) return;
+
+    cards.forEach(card => {
+        const glow = card.querySelector('.card-cursor-glow');
+        if (!glow) return;
+
+        let rafId = null;
+
+        card.addEventListener('mousemove', (e) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                glow.style.setProperty('--glow-x', `${x}%`);
+                glow.style.setProperty('--glow-y', `${y}%`);
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            // Reset to center so next entry is clean
+            glow.style.setProperty('--glow-x', '50%');
+            glow.style.setProperty('--glow-y', '50%');
+        });
+    });
+}
+
+
+// --- SOLUTIONS CONTOUR SCROLL PARALLAX ---
+function initContourParallax() {
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isReduced) return;
+
+    const primary = document.querySelector('.solutions-contour-primary');
+    const red = document.querySelector('.solutions-contour-red');
+    const section = document.getElementById('solutions');
+    if (!primary || !red || !section) return;
+
+    // Subtle vertical drift on scroll — GPU-only transforms
+    gsap.to(primary, {
+        y: 40,
+        ease: 'none',
+        scrollTrigger: {
+            trigger: section,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+        }
+    });
+
+    gsap.to(red, {
+        y: -25,
+        ease: 'none',
+        scrollTrigger: {
+            trigger: section,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+        }
+    });
+}
 
 // --- 3D Corner Card Animations ---
 function init3DCornerCards() {

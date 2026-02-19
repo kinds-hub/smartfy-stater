@@ -4,24 +4,25 @@
 */
 
 :root {
-    /* --- TIMING & EASING --- */
+    /* --- TIMING & EASING (Engineered) --- */
     /* Apple-style ease-out for distinct, premium feel */
-    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-premium: cubic-bezier(0.25, 1, 0.5, 1);
+    /* "Power2.out" feel */
     --ease-steady: cubic-bezier(0.33, 1, 0.68, 1);
 
     /* Standard Durations */
-    --duration-micro: 200ms;
-    /* Hover, Focus, Click */
-    --duration-steady: 400ms;
+    --duration-micro: 250ms;
+    /* Hover, Focus (Slightly slower for weight) */
+    --duration-steady: 500ms;
     /* State changes */
-    --duration-enter: 700ms;
-    /* Scroll, Load */
+    --duration-enter: 800ms;
+    /* Scroll reveals (Calm) */
 
     /* Metrics */
-    --scale-hover: 1.02;
-    /* Max 1.02 rule */
-    --scale-press: 0.98;
-    /* Max 0.98 rule */
+    --scale-hover: 1.01;
+    /* Extremely subtle lift */
+    --scale-press: 0.99;
+    /* Solid press */
 }
 
 /* --- MICRO-INTERACTIONS --- */

@@ -1,16 +1,192 @@
-/* Smartfy Main Styles */
+/* --- INDUSTRY BENTO GRID (Enterprise Standard) --- */
+
+.industry-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    /* Refined radius (16px) */
+    overflow: hidden;
+    padding: 2rem;
+    transition: transform var(--duration-steady) var(--ease-premium),
+        border-color var(--duration-steady) var(--ease-premium),
+        box-shadow var(--duration-steady) var(--ease-premium);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.industry-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(225, 29, 46, 0.3);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.card-glass-layer {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 60%);
+    opacity: 0;
+    transition: opacity var(--duration-steady) ease;
+    pointer-events: none;
+}
+
+.industry-card:hover .card-glass-layer {
+    opacity: 1;
+}
+
+/* Card Content Layout */
+.industry-card .card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+/* Header Alignment */
+.industry-card .card-header {
+    display: flex;
+    align-items: flex-start;
+    /* Anchor to top */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.industry-card .icon-box {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(225, 29, 46, 0.1);
+    color: var(--color-red);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.industry-card .card-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin: 0;
+    padding-top: 0.25rem;
+    /* Optical alignment with icon */
+    line-height: 1.2;
+}
+
+/* Description */
+.industry-card .card-desc {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-slate);
+    line-height: 1.6;
+    margin-bottom: auto;
+    /* Push meta to bottom */
+    padding-left: 0;
+}
+
+/* Meta Footer */
+.industry-card .card-meta {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+}
+
+.industry-card .arrow-icon {
+    font-size: 1rem;
+    color: var(--color-red);
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all var(--duration-micro) var(--ease-premium);
+}
+
+.industry-card:hover .arrow-icon {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@import 'motion.css';
+
 
 :root {
-    --color-navy: #F1F5F9;
-    /* Now off-white for contrast */
-    --color-bg-dark: #020617;
-    --color-slate: #94A3B8;
+    /* --- COLOR PALETTE (Enterprise AI) --- */
+    --color-navy: #0B1B3D;
     --color-red: #E11D2E;
+    --color-slate: #94A3B8;
     --color-white: #FFFFFF;
-    --color-pearl: #020617;
-    /* Replaced pearl with dark bg */
-    --color-grid: rgba(71, 85, 105, 0.3);
-    --color-glow: rgba(139, 92, 246, 0.15);
+    --color-bg-dark: #020617;
+    /* Deep Navy/Black base */
+
+    /* --- SPACING SYSTEM (Structured) --- */
+    --space-xs: 0.25rem;
+    /* 4px */
+    --space-sm: 0.5rem;
+    /* 8px */
+    --space-md: 1rem;
+    /* 16px */
+    --space-lg: 2rem;
+    /* 32px */
+    --space-xl: 4rem;
+    /* 64px */
+    --space-2xl: 6rem;
+    /* 96px */
+
+    /* --- GRID & LAYOUT --- */
+    --container-width: 1280px;
+    --grid-gap: 24px;
+
+    /* --- TYPOGRAPHY --- */
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+/* --- GLOBAL TYPOGRAPHY ENFORCEMENT --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-white);
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    /* 16px strict gap */
+}
+
+p {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-slate);
+    margin-bottom: var(--space-lg);
+    max-width: 65ch;
+    /* Readable measure */
+}
+
+.text-calm {
+    opacity: 0.8;
+}
+
+/* Remove default margins from last children to prevent spacing leaks */
+*:last-child {
+    margin-bottom: 0;
 }
 
 body {
@@ -44,7 +220,7 @@ body {
 .noise-texture {
     position: absolute;
     inset: 0;
-    opacity: 0.05;
+    opacity: 0.015;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     mix-blend-mode: overlay;
 }
@@ -76,6 +252,49 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+/* --- INFINITE SCROLL ANIMATION --- */
+@keyframes scroll-right {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.infinite-scroll {
+    animation: scroll-right 40s linear infinite;
+}
+
+/* Pause on hover optional */
+.scroll-container:hover .infinite-scroll {
+    animation-play-state: paused;
+}
+
+.scroll-container {
+    mask: linear-gradient(90deg,
+            transparent 0%,
+            black 10%,
+            black 90%,
+            transparent 100%);
+    -webkit-mask: linear-gradient(90deg,
+            transparent 0%,
+            black 10%,
+            black 90%,
+            transparent 100%);
+    overflow: hidden;
+}
+
+.image-item {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.image-item:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 /* --- Typography --- */
@@ -304,6 +523,10 @@ html.lenis {
     background: rgba(255, 255, 255, 0.05);
 }
 
+
+
+
+
 /* Scanning Line Animation */
 .scan-line {
     position: absolute;
@@ -462,8 +685,8 @@ html.lenis {
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.03;
-    /* 3% opacity as requested */
+    opacity: 0.015;
+    /* 1.5% opacity as requested */
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: multiply;
@@ -669,25 +892,177 @@ html.lenis {
     white-space: nowrap;
 }
 
-/* Bento Footer Grid */
-.bento-footer {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: 2rem;
+/* --- ENTERPRISE FOOTER STYLES --- */
+
+/* --- ENTERPRISE FOOTER STYLES --- */
+
+/* Strict Background Enforcement */
+.bg-smartfy-navy,
+footer,
+section#industries,
+section#solutions {
+    background-color: var(--color-navy) !important;
+    background-image: none !important;
 }
 
-.bento-item {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 2rem;
-    padding: 1.25rem;
-    transition: all 0.4s ease;
+/* Hide old ambient lights if present */
+.industry-ambient-light,
+.industry-noise-texture,
+.bg-premium-gradient {
+    display: none !important;
 }
 
-.bento-item:hover {
-    border-color: var(--color-red);
+.footer-heading {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    /* 14px */
+    font-weight: 700;
+    color: var(--color-white);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-links a {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-slate);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-white);
+}
+
+.social-link {
+    width: 2.5rem;
+    /* Larger touch target */
+    height: 2.5rem;
+    border-radius: 50%;
     background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-slate);
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.social-link:hover {
+    background: var(--color-white);
+    color: var(--color-navy);
+    border-color: var(--color-white);
+}
+
+/* Watermark */
+.footer-watermark-large {
+    position: absolute;
+    top: 45%;
+    /* Moved UP significantly from bottom: -8% */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(6rem, 20vw, 25rem);
+    font-weight: 900;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--color-white);
+    opacity: 0.03;
+    /* Balanced contrast */
+    white-space: nowrap;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Newsletter Interaction (Glassmorphism) */
+.newsletter-wrapper {
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.newsletter-input {
+    background: rgba(255, 255, 255, 0.03);
+    /* Low opacity */
+    backdrop-filter: blur(10px);
+    /* Glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-white);
+    transition: all 0.3s ease;
+}
+
+.newsletter-input::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+    /* Slate-400 with opacity */
+}
+
+.newsletter-input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(225, 29, 46, 0.4);
+    /* Red tint */
+    box-shadow: 0 0 15px rgba(225, 29, 46, 0.15);
+    /* Glow */
+    outline: none;
+}
+
+/* Industry Card Meta Positioning & Reveal */
+.industry-card .card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.industry-card .card-desc {
+    flex-grow: 1;
+    margin-bottom: 2rem;
+}
+
+/* Shift meta up so it doesn't touch bottom line */
+.industry-card .card-meta {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+
+    /* Reveal Animation State */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s var(--ease-premium);
+}
+
+/* Reveal on Hover */
+.industry-card:hover .card-meta {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.industry-card .card-meta span {
+    padding-left: 1rem;
+    border-left: 3px solid var(--color-red);
+    line-height: 1.2;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-slate);
+    letter-spacing: 0.02em;
+}
+
+.industry-card .card-meta .arrow-icon {
+    color: var(--color-red) !important;
+    font-size: 1.25rem;
 }
 
 /* --- FOCUS RAIL SYSTEM (React Port) --- */
@@ -1590,6 +1965,7 @@ h2,
         height: 280px;
     }
 
+
     /* Center-align everything on mobile */
     .w-full.max-w-4xl {
         flex-direction: column;
@@ -1725,4 +2101,1162 @@ h2,
     height: 2px;
     background-color: #E11D2E;
     margin-right: 1rem;
+}
+
+/* --- FLOATING GLASS CARD (SENIOR DEVELOPER EDITION) --- */
+.floating-glass-card {
+    background: rgba(2, 6, 23, 0.4);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2.5rem;
+    padding: 3.5rem;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    animation: float-hero-card 8s ease-in-out infinite;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 30;
+    transform-style: preserve-3d;
+}
+
+.floating-glass-card:hover {
+    border-color: rgba(225, 29, 46, 0.4);
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(225, 29, 46, 0.2);
+    transform: translateY(-5px) scale(1.01);
+}
+
+.floating-glass-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 40%, transparent 60%, rgba(225, 29, 46, 0.1));
+    border-radius: inherit;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes float-hero-card {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateX(0);
+    }
+
+    50% {
+        transform: translateY(-30px) rotateX(2deg);
+    }
+}
+
+.card-bloom {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(225, 29, 46, 0.08) 0%, transparent 70%);
+    filter: blur(60px);
+    z-index: -1;
+    pointer-events: none;
+    animation: bloom-pulse 10s ease-in-out infinite;
+}
+
+@keyframes bloom-pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        scale: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+        scale: 1.1;
+    }
+}
+
+
+/* --- ADVANCED SHIMMER SYSTEM (Vanilla Port) --- */
+:root {
+    --shimmer-button-bg: rgba(11, 27, 61, 1);
+    --shimmer-button-color: #ffffff;
+    --shimmer-button-speed: 3s;
+    --shimmer-button-spread: 90deg;
+    --shimmer-button-radius: 100px;
+}
+
+@keyframes shimmer-spin-around {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes shimmer-slide {
+    0% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
+    }
+}
+
+.shimmer-btn-wrapper {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 2.5rem;
+    color: white;
+    background: var(--shimmer-button-bg);
+    border-radius: var(--shimmer-button-radius);
+    transition: transform 0.3s ease;
+}
+
+.shimmer-btn-wrapper:active {
+    transform: translateY(1px);
+}
+
+/* Spark Container */
+.shimmer-spark-container {
+    position: absolute;
+    inset: 0;
+    z-index: -30;
+    overflow: visible;
+    filter: blur(2px);
+}
+
+.shimmer-spark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    aspect-ratio: 1;
+    border-radius: 0;
+    animation: shimmer-spin-around var(--shimmer-button-speed) linear infinite;
+    background: conic-gradient(from calc(270deg - (var(--shimmer-button-spread) * 0.5)), transparent 0, var(--shimmer-button-color) var(--shimmer-button-spread), transparent var(--shimmer-button-spread));
+}
+
+/* Backdrop */
+.shimmer-btn-backdrop {
+    position: absolute;
+    inset: 1px;
+    /* The "cut" size */
+    background: var(--shimmer-button-bg);
+    border-radius: inherit;
+    z-index: -20;
+}
+
+/* Highlight layer */
+.shimmer-highlight {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 -8px 10px rgba(255, 255, 255, 0.12);
+    transition: all 0.3s ease;
+}
+
+.shimmer-btn-wrapper:hover .shimmer-highlight {
+    box-shadow: inset 0 -6px 10px rgba(255, 255, 255, 0.25);
+}
+
+/* --- CARD SHIMMER VARIANT --- */
+.shimmer-card-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.shimmer-card-spark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    aspect-ratio: 1;
+    animation: shimmer-spin-around 8s linear infinite;
+    background: conic-gradient(from 0deg, transparent 0, rgba(225, 29, 46, 0.1) 45deg, transparent 90deg);
+    filter: blur(40px);
+}
+
+/* --- COLOR BALANCING: SOFT TECHNOLOGY CARDS --- */
+.light-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    border: 1px solid rgba(15, 36, 102, 0.08) !important;
+    box-shadow: 0 10px 25px -5px rgba(15, 36, 102, 0.05), 0 8px 10px -6px rgba(15, 36, 102, 0.03) !important;
+}
+
+.light-card .card-title {
+    color: #0F2466 !important;
+    /* Brand Navy */
+    font-weight: 700;
+}
+
+.light-card .card-text {
+    color: #475569 !important;
+    /* Soft Slate */
+    font-weight: 400;
+}
+
+.light-card .card-list li {
+    color: #475569 !important;
+    border-left: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.light-card .card-list li:hover {
+    color: #E11D2E !important;
+    padding-left: 0.5rem;
+    border-left: 2px solid #E11D2E;
+}
+
+.light-card .card-icon-box {
+    background: rgba(15, 36, 102, 0.04) !important;
+    color: #E11D2E !important;
+    border: 1px solid rgba(15, 36, 102, 0.05) !important;
+}
+
+.light-card .card-read-more {
+    color: #0F2466 !important;
+    opacity: 0.8;
+}
+
+.light-card .card-read-more:hover {
+    opacity: 1;
+    color: #E11D2E !important;
+}
+
+.light-card .card-watermark {
+    color: rgba(15, 36, 102, 0.03) !important;
+}
+
+
+/* --- NEW TECH GRID CARD STYLES --- */
+.tech-card {
+    position: relative;
+    background: #FFFFFF;
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(11, 27, 61, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    height: 100%;
+}
+
+.tech-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 40px -10px rgba(11, 27, 61, 0.1);
+    border-color: rgba(225, 29, 46, 0.2);
+}
+
+.tech-card-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(circle at 100% 0%, rgba(225, 29, 46, 0.03) 0%, transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.tech-card:hover .tech-card-bg {
+    opacity: 1;
+}
+
+.tech-icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+    background: #F8FAFC;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    transition: all 0.4s ease;
+}
+
+.tech-card:hover .tech-icon-wrapper {
+    background: rgba(225, 29, 46, 0.05);
+    transform: scale(1.1);
+}
+
+.tech-card-content {
+    position: relative;
+    z-index: 10;
+}
+
+/* --- HUB & SPOKE SYSTEM STYLES --- */
+
+/* Card Base */
+.hub-card {
+    background: rgba(11, 27, 61, 0.4);
+    /* Dark Navy Glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.hub-card:hover {
+    background: rgba(11, 27, 61, 0.6);
+    border-color: rgba(225, 29, 46, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(11, 27, 61, 0.4);
+}
+
+.hub-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
+}
+
+.hub-badge {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+}
+
+/* List Items (AI Card) */
+.hub-list-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.hub-list-item:hover,
+.hub-list-item.glass-highlight {
+    background: rgba(255, 255, 255, 0.08);
+    /* Brighter glass on hover */
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Insight Row (Robotics Card) */
+.hub-insight-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Sphere Animation */
+@keyframes spin-slow {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-reverse {
+    0% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-reverse {
+    animation: spin-reverse 15s linear infinite;
+}
+
+.animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Connector Lines */
+.connector-line {
+    transition: all 0.5s ease;
+    opacity: 0.5;
+}
+
+.hub-system-container:hover .connector-line {
+    opacity: 1;
+    stroke: url(#line-gradient);
+}
+
+/* --- REFINED HUB VISUALS (Double Card + Intense Glow) --- */
+
+/* 1. Intense Central Glow */
+.sphere-anim::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(225, 29, 46, 0.4) 0%, transparent 60%);
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(50px);
+    animation: pulse-glow 4s infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* 2. Double Card Effect (The 'Stack') */
+.hub-card-double {
+    position: relative;
+    z-index: 10;
+}
+
+.hub-card-double::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: 8px;
+    bottom: 8px;
+    background: rgba(11, 27, 61, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1.5rem;
+    z-index: -1;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+.hub-card-double:hover::before {
+    top: -12px;
+    left: -12px;
+    background: rgba(225, 29, 46, 0.1);
+    border-color: rgba(225, 29, 46, 0.2);
+}
+
+/* 3. Pass-Through Connector Styling */
+.connector-beam {
+    stroke-width: 3;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 5px rgba(225, 29, 46, 0.8));
+    animation: beam-pulse 3s infinite;
+}
+
+@keyframes beam-pulse {
+
+    0%,
+    100% {
+        stroke-opacity: 0.6;
+        stroke-width: 3;
+    }
+
+    50% {
+        stroke-opacity: 1;
+        stroke-width: 4;
+    }
+}
+
+/* Connector Gradient: Bright at Source (Center), Fade at Dest */
+/* Note: SVG definitions in HTML control this, but CSS adds the glow/pulse */
+
+
+/* --- RED CORNER SOLUTIONS CARD --- */
+.sol-card-red {
+    position: relative;
+    background: rgba(11, 27, 61, 0.5);
+    /* Dark Navy Glass */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Subtle border */
+    border-radius: 1rem;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    height: 100%;
+}
+
+.sol-card-red:hover {
+    transform: translateY(-5px);
+    background: rgba(11, 27, 61, 0.7);
+    border-color: rgba(225, 29, 46, 0.2);
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+.sol-corner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-color: #E11D2E;
+    border-style: solid;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.sol-corner.tl {
+    top: 0;
+    left: 0;
+    border-width: 3px 0 0 3px;
+    border-top-left-radius: 1rem;
+    /* Match card radius if needed, or square */
+}
+
+.sol-corner.tr {
+    top: 0;
+    right: 0;
+    border-width: 3px 3px 0 0;
+    border-top-right-radius: 1rem;
+}
+
+.sol-corner.bl {
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 3px 3px;
+    border-bottom-left-radius: 1rem;
+}
+
+.sol-corner.br {
+    bottom: 0;
+    right: 0;
+    border-width: 0 3px 3px 0;
+    border-bottom-right-radius: 1rem;
+}
+
+/* Hover Effect: Corners might glow or expand slightly */
+.sol-card-red:hover .sol-corner {
+    border-color: #ff3347;
+    /* Brighter Red */
+    filter: drop-shadow(0 0 4px rgba(225, 29, 46, 0.8));
+}
+
+.sol-card-red .icon-box {
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    color: #E11D2E;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.sol-card-red h5 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+.sol-card-red p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    max-width: 25ch;
+    margin: 0 auto;
+}
+
+/* --- HUB & SPOKE SYMMETRY FIX --- */
+/* Right-side cards need the double stack to shift RIGHT, not Left */
+.hub-card-double-right::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    /* Shift Right */
+    left: 8px;
+    /* Push in from Left */
+    bottom: 8px;
+    background: rgba(11, 27, 61, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1.5rem;
+    z-index: -1;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+/* --- CONNECTOR NODES & DATA FLOW --- */
+
+/* Node Styles */
+.connector-node-group circle {
+    transition: all 0.3s ease;
+}
+
+.connector-node-outer {
+    fill: rgba(11, 27, 61, 0.8);
+    /* Smartify Navy */
+    stroke: rgba(225, 29, 46, 0.4);
+    /* Smartify Red */
+    stroke-width: 1px;
+}
+
+.connector-node-inner {
+    fill: #E11D2E;
+    /* Smartify Red */
+    filter: drop-shadow(0 0 5px rgba(225, 29, 46, 0.8));
+}
+
+.hub-card:hover~svg .connector-node-inner {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
+}
+
+/* Data Packet Animation */
+.data-packet {
+    fill: #E11D2E;
+    filter: drop-shadow(0 0 4px #E11D2E);
+    opacity: 0;
+    animation: flow-opacity 3s linear infinite;
+}
+
+@keyframes flow-opacity {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Enhancing Beam Visibility */
+.connector-beam {
+    stroke-dasharray: 10, 5;
+    /* Dashed effect for tech look? Or solid beam? User said "cables/beams". Let's stick to solid but maybe flow texture. */
+    /* actually, let's keep solid for now as per "beam" feedback, but add a specialized flow animation on the stroke itself if possible, or just rely on the packet. */
+}
+
+/* --- PREMIUM SOLUTIONS SECTION (Apple/Stripe Style) --- */
+
+/* Section Background - Custom Image with Brand Overlay */
+.bg-premium-gradient {
+    background-image:
+        linear-gradient(135deg,
+            rgba(11, 27, 61, 0.85) 0%,
+            rgba(11, 27, 61, 0.65) 25%,
+            rgba(11, 27, 61, 0.45) 50%,
+            rgba(225, 29, 46, 0.25) 75%,
+            rgba(225, 29, 46, 0.35) 100%),
+        url('../assets/images/ solution bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Floating Animation for Image */
+.floating-animation {
+    animation: float-image 6s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+@keyframes float-image {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Feature/Service Cards (Stripe-like) - Brand Aligned with Corner Decorations - NAVY BLUE */
+.premium-card {
+    background: linear-gradient(135deg, rgba(11, 27, 61, 0.95) 0%, rgba(11, 27, 61, 0.85) 100%);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(225, 29, 46, 0.3);
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        0 2px 4px -1px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 0 1px rgba(225, 29, 46, 0.1);
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: visible;
+}
+
+
+/* Bottom corners (via child elements) */
+.premium-card .corner-bl {
+    position: absolute;
+    bottom: -2px;
+    left: -2px;
+    width: 20px;
+    height: 20px;
+    border-left: 2.5px solid rgba(225, 29, 46, 0.6);
+    border-bottom: 2.5px solid rgba(225, 29, 46, 0.6);
+    border-radius: 0 0 0 12px;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+    z-index: 2;
+}
+
+.premium-card .corner-br {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 20px;
+    height: 20px;
+    border-right: 2.5px solid rgba(225, 29, 46, 0.6);
+    border-bottom: 2.5px solid rgba(225, 29, 46, 0.6);
+    border-radius: 0 0 12px 0;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+    z-index: 2;
+}
+
+
+/* Corner hover effects - change to bright Red */
+.premium-card:hover::before,
+.premium-card:hover::after,
+.premium-card:hover .corner-bl,
+.premium-card:hover .corner-br {
+    border-color: #E11D2E;
+}
+
+.premium-card:hover {
+    background: linear-gradient(135deg, rgba(11, 27, 61, 1) 0%, rgba(15, 35, 75, 0.95) 100%);
+    transform: translateY(-4px);
+    box-shadow:
+        0 20px 60px rgba(225, 29, 46, 0.25),
+        0 0 0 1px rgba(225, 29, 46, 0.4),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(225, 29, 46, 0.5);
+}
+
+/* Light reflection overlay - adjusted for dark background */
+.premium-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Top corners - Red tint for Navy background */
+.premium-card .corner-tl {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 20px;
+    height: 20px;
+    border-left: 2.5px solid rgba(225, 29, 46, 0.6);
+    border-top: 2.5px solid rgba(225, 29, 46, 0.6);
+    border-radius: 12px 0 0 0;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+    z-index: 2;
+}
+
+.premium-card .corner-tr {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 20px;
+    height: 20px;
+    border-right: 2.5px solid rgba(225, 29, 46, 0.6);
+    border-top: 2.5px solid rgba(225, 29, 46, 0.6);
+    border-radius: 0 12px 0 0;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+    z-index: 2;
+}
+
+/* Update hover effects for all corners */
+.premium-card:hover .corner-tl,
+.premium-card:hover .corner-tr,
+.premium-card:hover .corner-bl,
+.premium-card:hover .corner-br {
+    border-color: #E11D2E;
+}
+
+.premium-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(225, 29, 46, 0.2) 0%, rgba(225, 29, 46, 0.1) 100%);
+    border: 1px solid rgba(225, 29, 46, 0.3);
+    color: #E11D2E;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 2px 8px rgba(225, 29, 46, 0.2),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.premium-card:hover .premium-card-icon {
+    background: linear-gradient(135deg, rgba(225, 29, 46, 0.4) 0%, rgba(225, 29, 46, 0.3) 100%);
+    border-color: #E11D2E;
+    color: #FF2D3E;
+    transform: scale(1.05) rotate(-5deg);
+    box-shadow:
+        0 4px 12px rgba(225, 29, 46, 0.4),
+        0 0 20px rgba(225, 29, 46, 0.3),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Connector Line (Vertical Flow) */
+.solution-connector {
+    position: absolute;
+    left: 24px;
+    /* Align with icon center */
+    top: 60px;
+    bottom: -30px;
+    width: 2px;
+    background: rgba(11, 27, 61, 0.1);
+    /* Navy tint */
+    z-index: 0;
+}
+
+.premium-card:last-child .solution-connector {
+    display: none;
+}
+
+.solution-connector::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to bottom, #E11D2E, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.premium-card:hover .solution-connector::after {
+    opacity: 1;
+    animation: flow-down 1.5s infinite;
+}
+
+@keyframes flow-down {
+    0% {
+        top: -100%;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* --- MOTION SYSTEM STYLES (Tech Section) --- */
+
+/* Container for the hub system - enables 3D context */
+.hub-system-container {
+    perspective: 1000px;
+    /* Dynamic Spotlight Variables managed by JS */
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    position: relative;
+    /* Ensure relative positioning for absolute children */
+}
+
+/* Spotlight / Glow Effect */
+.hub-system-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),
+            rgba(225, 29, 46, 0.08),
+            transparent 40%);
+    pointer-events: none;
+    z-index: 5;
+    transition: opacity 0.5s ease;
+    opacity: 1;
+}
+
+/* Hub Cards - Enhanced for Motion */
+.hub-card {
+    /* Existing styles preserved, but enhanced for 3D */
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+    /* Transition handled by GSAP for movement, but we keep colors smooth */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hub-card.is-hovering {
+    border-color: var(--color-red) !important;
+    box-shadow: 0 10px 30px -5px rgba(225, 29, 46, 0.2) !important;
+    z-index: 50 !important;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+    .hub-card {
+        transition: transform 0.3s ease !important;
+        transform: none !important;
+    }
+
+    .hub-system-container::after {
+        display: none;
+    }
+}
+
+/* --- INDUSTRY BENTO REDESIGN --- */
+.industry-bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+@media (min-width: 1024px) {
+    .industry-bento-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 320px);
+    }
+
+    .industry-bento-card.card-large {
+        grid-row: span 2;
+        height: 100%;
+    }
+}
+
+.industry-bento-card {
+    background: #0B1B3D;
+    /* Dark navy */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* 8% opacity */
+    border-radius: 2rem;
+    padding: 4rem 2.5rem 2.5rem 2.5rem;
+    /* Tesla-style top-weighting start */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Removed flex-end for top-weighted hierarchy */
+}
+
+.industry-bento-card.card-large {
+    padding-top: 5rem;
+    /* More gravity for larger card */
+}
+
+.industry-bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.12);
+    /* 12% opacity */
+}
+
+/* Internal Card Elements */
+.industry-bento-card .card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.industry-bento-card .card-icon {
+    font-size: 2.5rem;
+    color: var(--color-red);
+    margin-bottom: 1.25rem;
+    /* Tightened cluster */
+    transition: transform 0.6s ease;
+}
+
+.industry-bento-card.card-large .card-icon {
+    font-size: 3.5rem;
+    /* Larger icon for primary card */
+}
+
+.industry-bento-card:hover .card-icon {
+    transform: scale(1.05);
+}
+
+.industry-bento-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 0.75rem;
+    /* Tightened cluster */
+}
+
+.industry-bento-card.card-large h3 {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.industry-bento-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 90%;
+}
+
+/* --- LIGHTING SYSTEM --- */
+.industry-ambient-light {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    width: 80%;
+    height: 60%;
+    background: radial-gradient(ellipse at top center,
+            rgba(255, 255, 250, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 30%,
+            transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 1;
+    /* Combined drift: ±20px Vertical (30s), ±10px Horizontal (40s) */
+    animation: lightDriftV 30s ease-in-out infinite alternate,
+        lightDriftH 40s ease-in-out infinite alternate;
+}
+
+@keyframes lightDriftV {
+    from {
+        transform: translateY(-20px);
+    }
+
+    to {
+        transform: translateY(20px);
+    }
+}
+
+@keyframes lightDriftH {
+    from {
+        transform: translateX(-10px);
+    }
+
+    to {
+        transform: translateX(10px);
+    }
+}
+
+/* --- NOISE LAYER --- */
+.industry-noise-texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.02;
+    /* 2% opacity */
+    pointer-events: none;
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    animation: noiseAnim 0.2s infinite;
+}
+
+@keyframes noiseAnim {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-1px, -1px);
+    }
+
+    20% {
+        transform: translate(-2px, 1px);
+    }
+
+    30% {
+        transform: translate(1px, -2px);
+    }
+
+    40% {
+        transform: translate(-1px, 2px);
+    }
+
+    50% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 1px);
+    }
+
+    70% {
+        transform: translate(1px, 1px);
+    }
+
+    80% {
+        transform: translate(-2px, 1px);
+    }
+
+    90% {
+        transform: translate(1px, 2px);
+    }
+
+    100% {
+        transform: translate(1px, -1px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .industry-ambient-light,
+    .industry-noise-texture {
+        animation: none;
+    }
+
+    .industry-bento-card {
+        transition: none;
+    }
 }

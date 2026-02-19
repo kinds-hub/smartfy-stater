@@ -38,6 +38,11 @@ class TechAnimController {
     init() {
         console.log('TechAnimController: Initializing...');
 
+        // Register ScrollTrigger
+        if (typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
+
         // Setup Event Listeners
         window.addEventListener('mousemove', this.handleMouseMove.bind(this));
 
@@ -50,6 +55,9 @@ class TechAnimController {
             card.addEventListener('mouseleave', () => this.handleCardHover(card, false));
         });
 
+        // Initialize Scroll Reveals
+        this.setupScrollReveals();
+
         // Initial check for reduced motion
         this.updateMotionPreferences();
         window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', this.updateMotionPreferences.bind(this));
@@ -59,6 +67,70 @@ class TechAnimController {
         this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (this.isReducedMotion) {
             console.log('TechAnimController: Reduced motion enabled.');
+            // Kill all GSAP tweens if reduced motion is on to be safe
+            gsap.killTweensOf('*');
+        }
+    }
+
+    setupScrollReveals() {
+        if (this.isReducedMotion || typeof ScrollTrigger === 'undefined') return;
+
+        // 1. Industry Cards Stagger
+        const industryCards = document.querySelectorAll('.industry-card');
+        if (industryCards.length > 0) {
+            gsap.fromTo(industryCards,
+                { y: 30, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: '.industry-bento-grid',
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        }
+
+        // 2. Footer Structural Reveal
+        const footerHeadings = document.querySelectorAll('.footer-heading');
+        if (footerHeadings.length > 0) {
+            gsap.fromTo(footerHeadings,
+                { y: 20, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    stagger: 0.05,
+                    scrollTrigger: {
+                        trigger: 'footer',
+                        start: 'top 90%'
+                    }
+                }
+            );
+        }
+
+        const footerLinks = document.querySelectorAll('.footer-links');
+        if (footerLinks.length > 0) {
+            gsap.fromTo(footerLinks,
+                { y: 15, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    delay: 0.1,
+                    ease: 'power2.out',
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: 'footer',
+                        start: 'top 90%'
+                    }
+                }
+            );
         }
     }
 
@@ -70,9 +142,11 @@ class TechAnimController {
         this.mouse.y = e.clientY;
 
         // Specific logic if mouse is over the section
-        const rect = this.section.getBoundingClientRect();
-        if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-            this.updateSpotlight(e.clientX - rect.left, e.clientY - rect.top);
+        if (this.section) {
+            const rect = this.section.getBoundingClientRect();
+            if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                this.updateSpotlight(e.clientX - rect.left, e.clientY - rect.top);
+            }
         }
     }
 
@@ -106,14 +180,14 @@ class TechAnimController {
     }
 
     animate() {
+        if (this.isReducedMotion) return;
+
         // Smooth Mouse Lerp
         this.smoothMouse.x += (this.mouse.x - this.smoothMouse.x) * this.config.lerpFactor;
         this.smoothMouse.y += (this.mouse.y - this.smoothMouse.y) * this.config.lerpFactor;
 
         // Apply Magnetic Effect to Cards
         this.cards.forEach(card => {
-            if (this.isReducedMotion) return; // Skip if restricted
-
             const rect = card.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
@@ -156,6 +230,10 @@ class TechAnimController {
 document.addEventListener('DOMContentLoaded', () => {
     // Check if GSAP is loaded
     if (typeof gsap !== 'undefined') {
+        // Register ScrollTrigger first
+        if (typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
         new TechAnimController();
     } else {
         console.warn('TechAnimController: GSAP not found. Animations disabled.');

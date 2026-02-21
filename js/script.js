@@ -739,37 +739,37 @@ function initScrollReveal() {
 const focusRailItems = [
     {
         id: 0,
-        title: "Electronics & <span class='opacity-40'>Robotics</span>",
-        desc: "Intelligent hardware systems powering automation. From industrial robotics to embedded IoT devices.",
-        meta: "HARDWARE_SYS",
+        title: "Smartify <span class='opacity-40'>Electronics</span>",
+        desc: "We engineer intelligent hardware systems for automation, monitoring, and smart environments — from robotics to custom IoT and embedded solutions.",
+        meta: "ROBOTICS · EMBEDDED · IOT",
         color: "rgba(225, 29, 46, 0.4)" // Smartify Red
     },
     {
         id: 1,
-        title: "Software & <span class='opacity-40'>AI</span>",
-        desc: "AI powered algorithms transforming data into decisions. Neural networks driving next gen logic.",
-        meta: "NEURAL_CORE",
+        title: "Smartify <span class='opacity-40'>Software</span>",
+        desc: "We build scalable digital platforms that improve efficiency, visibility, and customer engagement through web, mobile, AI, and automation systems.",
+        meta: "WEB · MOBILE · AI",
         color: "rgba(56, 189, 248, 0.4)" // Cyan
     },
     {
         id: 2,
         title: "Smart <span class='opacity-40'>Future</span>",
-        desc: "Education & Innovation. Preparing the next generation with immersive tech and adaptive learning.",
-        meta: "EDU_INNO",
+        desc: "We prepare Africa’s next generation with practical training in AI, robotics, IoT, and coding — building a workforce ready for tomorrow’s economy.",
+        meta: "TECH ED · YOUTH INNOVATION",
         color: "rgba(168, 85, 247, 0.4)" // Purple
     },
     {
         id: 3,
-        title: "Energies <span class='opacity-40'>Matrix</span>",
-        desc: "Clean Power & Sustainability solutions. Smart grids optimizing consumption for a greener planet.",
-        meta: "SUSTAINABLE",
+        title: "Smartify <span class='opacity-40'>Energies</span>",
+        desc: "We deliver clean energy systems and smart monitoring solutions that reduce costs, increase efficiency, and enable long-term energy independence.",
+        meta: "CLEAN POWER · SMART ENERGY",
         color: "rgba(34, 197, 94, 0.4)" // Green
     },
     {
         id: 4,
-        title: "Digital <span class='opacity-40'>Strategy</span>",
-        desc: "Strategy & Branding presence. Connecting global networks with high impact digital experiences.",
-        meta: "CONNECTIVITY",
+        title: "Smartify <span class='opacity-40'>Digital & Consulting</span>",
+        desc: "We align strategy, branding, and technology to help organizations launch, grow, and scale with clarity, structure, and measurable impact.",
+        meta: "CREATIVE · STRATEGY · ADVISORY",
         color: "rgba(251, 146, 60, 0.4)" // Orange
     }
 ];
@@ -879,7 +879,7 @@ function updateFocusRail() {
             duration: 0.2,
             onComplete: () => {
                 railTextContainer.innerHTML = `
-                    <div class="space-y-2">
+                    <div class="space-y-2 max-w-[480px] mx-auto md:mx-0">
                         <div class="flex items-center justify-center md:justify-start">
                             <span class="operational-line"></span>
                             <span class="font-mono text-xs text-smartfy-red tracking-widest uppercase font-bold">${item.meta}</span>

@@ -198,63 +198,259 @@ animateHero();
 
 
 
-// --- 3. NAVIGATION & MOBILE MENU (SimpleHeader Sheet) ---
-const menuToggle = document.getElementById('menu-toggle');
-const sheetDrawer = document.getElementById('sheet-drawer');
-const sheetOverlay = document.getElementById('sheet-overlay');
-const closeBtn = document.getElementById('close-btn');
-const sheetLinks = document.querySelectorAll('.sheet-link, .sheet-btn-primary');
+// ===================================================================
+// SMARTIFY ENTERPRISE NAV — Complete JS System
+// ===================================================================
 
-function openMenu() {
-    sheetDrawer.classList.remove('-translate-x-full');
-    sheetOverlay.classList.remove('opacity-0', 'pointer-events-none');
-}
+(function initEnterpriseNav() {
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const header = document.getElementById('site-header');
+    const menuToggle = document.getElementById('menu-toggle');
+    const sheetDrawer = document.getElementById('sheet-drawer');
+    const sheetOverlay = document.getElementById('sheet-overlay');
+    const closeBtn = document.getElementById('close-btn');
 
-function closeMenu() {
-    sheetDrawer.classList.add('-translate-x-full');
-    sheetOverlay.classList.add('opacity-0', 'pointer-events-none');
-}
+    // ---- 1. Mobile drawer open/close ----
+    function openMenu() {
+        sheetDrawer.classList.remove('-translate-x-full');
+        sheetOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        sheetDrawer.classList.add('is-open');
+    }
+    function closeMenu() {
+        sheetDrawer.classList.add('-translate-x-full');
+        sheetOverlay.classList.add('opacity-0', 'pointer-events-none');
+        sheetDrawer.classList.remove('is-open');
+    }
 
-if (menuToggle) menuToggle.addEventListener('click', openMenu);
-if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-if (sheetOverlay) sheetOverlay.addEventListener('click', closeMenu);
+    if (menuToggle) menuToggle.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    if (sheetOverlay) sheetOverlay.addEventListener('click', closeMenu);
 
-sheetLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        closeMenu();
-        if (href && href !== '#') {
+    // Close sheet when any non-accordion link inside it is clicked
+    sheetDrawer && sheetDrawer.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', e => {
+            const href = link.getAttribute('href');
+            closeMenu();
+            if (href && href !== '#') {
+                e.preventDefault();
+                setTimeout(() => {
+                    const target = document.querySelector(href);
+                    if (target && typeof lenis !== 'undefined') lenis.scrollTo(target, { offset: -70 });
+                }, 320);
+            }
+        });
+    });
+
+    // ---- 2. Mobile accordion groups ----
+    document.querySelectorAll('.mobile-acc-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const targetId = trigger.dataset.mobileAcc;
+            const body = document.getElementById(targetId);
+            if (!body) return;
+            const isExpanded = body.classList.contains('is-open');
+            // Collapse all others
+            document.querySelectorAll('.mobile-acc-body.is-open').forEach(b => {
+                b.classList.remove('is-open');
+                const t = document.querySelector(`[data-mobile-acc="${b.id}"]`);
+                if (t) t.classList.remove('is-open');
+            });
+            if (!isExpanded) {
+                body.classList.add('is-open');
+                trigger.classList.add('is-open');
+            }
+        });
+    });
+
+    // ---- 3. Desktop dropdown system ----
+    const dropdownItems = document.querySelectorAll('.snav-has-dropdown');
+    let openTimer = null;
+    let closeTimer = null;
+    let currentOpen = null;
+
+    function openItem(item) {
+        if (currentOpen && currentOpen !== item) closeItem(currentOpen, true);
+        item.classList.add('is-open');
+        const trigger = item.querySelector('.snav-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'true');
+        currentOpen = item;
+    }
+
+    function closeItem(item, immediate = false) {
+        const doClose = () => {
+            item.classList.remove('is-open');
+            const trigger = item.querySelector('.snav-trigger');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            if (currentOpen === item) currentOpen = null;
+        };
+        if (immediate) {
+            clearTimeout(closeTimer);
+            doClose();
+        } else {
+            closeTimer = setTimeout(doClose, 120);
+        }
+    }
+
+    function closeAllItems() {
+        dropdownItems.forEach(item => closeItem(item, true));
+    }
+
+    dropdownItems.forEach(item => {
+        // Hover trigger
+        item.addEventListener('mouseenter', () => {
+            clearTimeout(closeTimer);
+            clearTimeout(openTimer);
+            openTimer = setTimeout(() => openItem(item), 130);
+        });
+
+        item.addEventListener('mouseleave', () => {
+            clearTimeout(openTimer);
+            closeItem(item);
+        });
+
+        // Click for touch / keyboard
+        const trigger = item.querySelector('.snav-trigger');
+        if (trigger) {
+            trigger.addEventListener('click', () => {
+                if (item.classList.contains('is-open')) {
+                    closeItem(item, true);
+                } else {
+                    openItem(item);
+                }
+            });
+        }
+    });
+
+    // Escape key closes all
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeAllItems();
+    });
+
+    // Click outside closes dropdowns
+    document.addEventListener('click', e => {
+        if (!e.target.closest('.snav-has-dropdown')) closeAllItems();
+    });
+
+    // ---- 4. Company mega GSAP text animations ----
+    const companyWrap = document.getElementById('company-dropdown-wrap');
+    const headline = document.getElementById('company-headline');
+    const storyBlock = document.querySelector('.company-story-block');
+    const companyBlocks = document.querySelectorAll('.company-block');
+    const brandStatement = document.getElementById('company-brand-statement');
+
+    // Set initial states
+    if (!isReduced && headline) {
+        gsap.set(headline, { opacity: 0, y: 20 });
+        gsap.set(storyBlock, { opacity: 0, y: 15 });
+        gsap.set(companyBlocks, { opacity: 0, y: 12 });
+        if (brandStatement) gsap.set(brandStatement, { opacity: 0, y: 8 });
+    }
+
+    if (companyWrap) {
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(m => {
+                if (m.attributeName === 'class') {
+                    const isOpen = companyWrap.classList.contains('is-open');
+                    if (isOpen && !isReduced) {
+                        // Animate in
+                        gsap.to(headline, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.05 });
+                        gsap.to(storyBlock, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.22 });
+                        gsap.fromTo(companyBlocks,
+                            { opacity: 0, y: 12 },
+                            { opacity: 1, y: 0, duration: 0.65, stagger: 0.1, ease: 'power2.out', delay: 0.2 }
+                        );
+                        if (brandStatement) gsap.fromTo(brandStatement,
+                            { opacity: 0, y: 8 },
+                            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.6 }
+                        );
+                    } else if (!isOpen && !isReduced) {
+                        // Reset
+                        gsap.set([headline, storyBlock], { opacity: 0, y: 20 });
+                        gsap.set(companyBlocks, { opacity: 0, y: 12 });
+                        if (brandStatement) gsap.set(brandStatement, { opacity: 0, y: 8 });
+                    }
+                }
+            });
+        });
+        observer.observe(companyWrap, { attributes: true });
+    }
+
+    // Backdrop click for company mega
+    const companyBackdrop = document.getElementById('company-backdrop-blur');
+    if (companyBackdrop) {
+        companyBackdrop.addEventListener('click', () => closeAllItems());
+    }
+
+    // ---- 5. Desktop smooth scroll for all nav anchor links ----
+    document.querySelectorAll('.snav-link[href^="#"], .snav-dropdown-link[href^="#"], .snav-cta-btn[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
             e.preventDefault();
-            setTimeout(() => {
-                const target = document.querySelector(href);
-                if (target) lenis.scrollTo(target, { offset: -80 });
-            }, 300);
-        }
+            closeAllItems();
+            const target = document.querySelector(href);
+            if (target && typeof lenis !== 'undefined') lenis.scrollTo(target, { offset: -70 });
+        });
     });
-});
 
-// Desktop Links Smooth Scroll
-document.querySelectorAll('.nav-ghost-link, a[href^="#"].group').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        const target = document.querySelector(targetId);
-        if (target) {
-            lenis.scrollTo(target, { offset: -80 });
+    // ---- 6. Scroll compress (navbar height shrinks on scroll) ----
+    let lastScrollY = 0;
+    const onScroll = () => {
+        const y = window.scrollY;
+        if (header) {
+            if (y > 60) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
-    });
-});
+        lastScrollY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // init state
 
+    // ---- 7. Active section detection ----
+    const sectionMap = {
+        '#solutions': 'solutions',
+        '#services': 'services',
+        '#industries': 'industries',
+        '#technologies': 'technologies',
+        '#contact': 'contact'
+    };
 
-// [Removed old glass-card triggers in favor of unified system]
+    function setActiveLink(sectionId) {
+        document.querySelectorAll('.snav-link').forEach(l => l.classList.remove('snav-active-section'));
 
-// Update Header on Scroll
-ScrollTrigger.create({
-    start: 'top -50',
-    end: 99999,
-    toggleClass: { className: 'scrolled', targets: '#navbar' }
-});
+        // Find which nav link corresponds
+        const desktopLinks = document.querySelectorAll('#desktop-nav .snav-link, #desktop-nav .snav-trigger, .snav-cta-btn');
+        desktopLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            const dataSec = link.getAttribute('data-section');
+            const dd = link.closest('.snav-item');
+            const ddKey = dd ? dd.dataset.dropdown : null;
+
+            const targetKey = sectionMap[sectionId];
+
+            if (href === sectionId || dataSec === targetKey || ddKey === targetKey) {
+                link.classList.add('snav-active-section');
+            }
+        });
+    }
+
+    // Use IntersectionObserver for section detection
+    const navSections = document.querySelectorAll('section[id], footer[id="contact"]');
+    if (navSections.length) {
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveLink('#' + entry.target.id);
+                }
+            });
+        }, { threshold: 0.25 }); // Threshold lower for very tall sections
+
+        navSections.forEach(s => sectionObserver.observe(s));
+    }
+
+})();
 
 // Window Resize
 window.addEventListener('resize', () => {
@@ -262,11 +458,9 @@ window.addEventListener('resize', () => {
         heroWidth = heroCanvas.width = window.innerWidth;
         heroHeight = heroCanvas.height = window.innerHeight;
     }
-    // introWidth = introCanvas.width = window.innerWidth;
-    // introHeight = introCanvas.height = window.innerHeight;
 });
 
-// --- 5. SIGNATURE FOOTER & ADVANCED INTERACTIONS ---
+
 
 
 
